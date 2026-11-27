@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-T883SM5G"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal de Gestión Logística y Flotas — SaaS B2B | Demo SafesaTech</title>
+  <meta name="description" content="Demo funcional de Web App SaaS para gestión logística, seguimiento de rutas, albaranes digitales y facturación en tiempo real desarrollada por SafesaTech.es." />
+  <link rel="canonical" href="https://safesatech.es/demos/portal-logistica-flotas.html" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+  <style>
+    :root {
+      --bg: #0D1015;
+      --surface: #141923;
+      --surface-2: #1A2130;
+      --cyan: #00D2D3;
+      --green: #1DD1A1;
+      --blue: #0984E3;
+      --amber: #F59E0B;
+      --red: #EF4444;
+      --text: #FFFFFF;
+      --muted: #94A3B8;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+    * { box-sizing: border-box; }
+    html { overflow-x: clip; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      overflow-x: clip;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding-inline: 20px; }
+
+    .demo-topbar { background: #0A0D12; border-bottom: 1px solid rgba(0, 210, 211, 0.25); font-size: 0.84rem; padding: 10px 0; }
+    .demo-topbar__inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+    .demo-topbar__back { color: var(--cyan); font-weight: 600; }
+    .demo-topbar__cta { background: linear-gradient(135deg, var(--cyan), var(--blue)); color: #071017; font-weight: 700; padding: 6px 14px; border-radius: 999px; font-size: 0.8rem; }
+
+    .app-header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      background: rgba(20, 25, 35, 0.7);
+    }
+    .app-header__inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; }
+    .app-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; margin: 0; }
+    .app-sub { color: var(--muted); font-size: 0.88rem; margin: 2px 0 0; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 10px 18px; border-radius: 10px; font-weight: 600; font-size: 0.88rem;
+      border: 1px solid transparent; cursor: pointer; font-family: inherit;
+    }
+    .btn--primary { background: linear-gradient(135deg, var(--cyan), var(--blue)); color: #071017; font-weight: 700; }
+    .btn--ghost { background: rgba(255,255,255,0.05); border-color: var(--border); color: var(--text); }
+    .btn--sm { padding: 6px 11px; font-size: 0.78rem; border-radius: 8px; }
+
+    .main { padding: 28px 0 64px; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px; }
+    .kpi-label { font-size: 0.8rem; color: var(--muted); display: block; margin-bottom: 6px; }
+    .kpi-val { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.75rem; font-weight: 800; display: block; }
+    .kpi-tag { font-size: 0.78rem; color: var(--green); font-weight: 600; }
+
+    .workspace-grid { display: grid; grid-template-columns: 1.45fr 0.75fr; gap: 20px; align-items: start; }
+    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 22px; min-width: 0; }
+
+    .toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tab { background: var(--surface-2); border: 1px solid var(--border); color: var(--muted); padding: 7px 13px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
+    .tab.is-active { background: var(--cyan); color: #071017; border-color: var(--cyan); }
+    .input {
+      background: var(--bg); border: 1px solid var(--border); color: var(--text);
+      padding: 9px 12px; border-radius: 9px; font: inherit; font-size: 0.88rem;
+    }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    th { color: var(--cyan); font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .status { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; }
+    .status--ruta { background: rgba(0, 210, 211, 0.14); color: var(--cyan); }
+    .status--entregado { background: rgba(29, 209, 161, 0.16); color: var(--green); }
+    .status--incidencia { background: rgba(239, 68, 68, 0.16); color: #FCA5A5; }
+
+    .form-grid { display: grid; gap: 12px; }
+    .form-grid label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+    .form-grid .input { width: 100%; }
+
+    .toast {
+      margin-top: 12px; padding: 12px 14px; border-radius: 10px;
+      background: rgba(29, 209, 161, 0.14); border: 1px solid rgba(29, 209, 161, 0.35);
+      color: #D1FAE5; font-size: 0.86rem;
+    }
+
+    @media (max-width: 960px) {
+      .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .workspace-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 540px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-topbar">
+    <div class="container demo-topbar__inner">
+      <a href="/#proyectos" class="demo-topbar__back">← Volver a SafesaTech.es</a>
+      <span>Proyecto real interactivo: <strong>Web App SaaS — Logística y Flotas</strong></span>
+      <a href="/#contacto" class="demo-topbar__cta">Quiero un software así</a>
+    </div>
+  </div>
+
+  <header class="app-header">
+    <div class="container app-header__inner">
+      <div>
+        <h1 class="app-title">LogiFlow SaaS — Control de Flotas y Albaranes</h1>
+        <p class="app-sub">Seguimiento en tiempo real, firma de albaranes digitales y facturación automática.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button type="button" id="export-csv" class="btn btn--ghost">Exportar albaranes (CSV)</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-label">Rutas activas hoy</span>
+          <strong class="kpi-val" id="kpi-total">0</strong>
+          <span class="kpi-tag">Sincronizado con conductores</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Albaranes firmados</span>
+          <strong class="kpi-val" id="kpi-done">0</strong>
+          <span class="kpi-tag">Facturación lista</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">En reparto ahora</span>
+          <strong class="kpi-val" id="kpi-active">0</strong>
+          <span class="kpi-tag" style="color:var(--cyan);">GPS en tiempo real</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Facturación del turno</span>
+          <strong class="kpi-val" id="kpi-rev">0 €</strong>
+          <span class="kpi-tag">-60 % tiempo administrativo</span>
+        </div>
+      </div>
+
+      <div class="workspace-grid">
+        <section class="panel">
+          <div class="toolbar">
+            <div class="tabs">
+              <button type="button" class="tab is-active" data-filter="todos">Todos</button>
+              <button type="button" class="tab" data-filter="En ruta">En ruta</button>
+              <button type="button" class="tab" data-filter="Entregado">Entregado</button>
+              <button type="button" class="tab" data-filter="Incidencia">Incidencia</button>
+            </div>
+            <input type="search" id="search-ship" class="input" placeholder="Buscar código, cliente o ciudad..." aria-label="Buscar envío" />
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Albarán</th>
+                  <th>Cliente / Destino</th>
+                  <th>Conductor</th>
+                  <th>Importe</th>
+                  <th>Estado</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody id="ship-tbody"></tbody>
+            </table>
+          </div>
+          <div id="action-toast" class="toast" hidden></div>
+        </section>
+
+        <aside class="panel">
+          <h2 style="margin:0 0 6px;font-size:1.15rem;font-family:'Plus Jakarta Sans',sans-serif;">Asignar nueva ruta</h2>
+          <p style="margin:0 0 16px;font-size:0.86rem;color:var(--muted);">Prueba añadir un envío real al panel y fírmalo desde la tabla.</p>
+          <form id="new-route-form" class="form-grid">
+            <div>
+              <label for="r-client">Cliente / Empresa</label>
+              <input id="r-client" class="input" required placeholder="Ej. Distribuciones Levante S.L." />
+            </div>
+            <div>
+              <label for="r-city">Destino</label>
+              <input id="r-city" class="input" required placeholder="Ej. Zaragoza — Pol. Plaza" />
+            </div>
+            <div>
+              <label for="r-driver">Conductor y vehículo</label>
+              <select id="r-driver" class="input">
+                <option>Carlos M. • Furgón 4821-LMP</option>
+                <option>Elena R. • Camión 9012-KTR</option>
+                <option>Javier S. • Furgón 1134-MNB</option>
+              </select>
+            </div>
+            <div>
+              <label for="r-amount">Importe facturable (€)</label>
+              <input id="r-amount" type="number" min="20" step="5" value="240" class="input" required />
+            </div>
+            <button type="submit" class="btn btn--primary" style="width:100%;">Crear albarán y lanzar ruta</button>
+          </form>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const shipments = [
+      { id: 'ALB-2601', client: 'Mercacentro Norte', city: 'Madrid • Coslada', driver: 'Carlos M.', amount: 420, status: 'En ruta', invoiced: false },
+      { id: 'ALB-2602', client: 'Clínicas SaludSur', city: 'Sevilla • Nervión', driver: 'Elena R.', amount: 315, status: 'Entregado', invoiced: true },
+      { id: 'ALB-2603', client: 'Hostelería Costa', city: 'Valencia • Puerto', driver: 'Javier S.', amount: 580, status: 'En ruta', invoiced: false },
+      { id: 'ALB-2604', client: 'Ferretería Industrial', city: 'Bilbao • Barakaldo', driver: 'Carlos M.', amount: 195, status: 'Incidencia', invoiced: false },
+      { id: 'ALB-2605', client: 'Grupo Alimentario Ebro', city: 'Barcelona • Zona Franca', driver: 'Elena R.', amount: 640, status: 'Entregado', invoiced: true }
+    ];
+
+    let activeFilter = 'todos';
+
+    function render() {
+      const q = document.getElementById('search-ship').value.trim().toLowerCase();
+      const filtered = shipments.filter((s) => {
+        if (activeFilter !== 'todos' && s.status !== activeFilter) return false;
+        if (q && !(`${s.id} ${s.client} ${s.city} ${s.driver}`).toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      const tbody = document.getElementById('ship-tbody');
+      tbody.innerHTML = filtered.map((s) => {
+        const cls = s.status === 'Entregado' ? 'status--entregado' : (s.status === 'Incidencia' ? 'status--incidencia' : 'status--ruta');
+        const actionBtn = s.status !== 'Entregado'
+          ? `<button type="button" class="btn btn--primary btn--sm" onclick="markDelivered('${s.id}')">Firmar entrega</button>`
+          : (s.invoiced
+              ? `<span style="color:var(--green);font-size:0.78rem;font-weight:600;">Facturado ✓</span>`
+              : `<button type="button" class="btn btn--ghost btn--sm" onclick="invoiceItem('${s.id}')">Facturar</button>`);
+        return `
+          <tr>
+            <td><strong>${s.id}</strong></td>
+            <td><strong>${s.client}</strong><br><small style="color:var(--muted);">${s.city}</small></td>
+            <td>${s.driver}</td>
+            <td><strong>${s.amount} €</strong></td>
+            <td><span class="status ${cls}">${s.status}</span></td>
+            <td>${actionBtn}</td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById('kpi-total').textContent = shipments.length;
+      document.getElementById('kpi-done').textContent = shipments.filter((s) => s.status === 'Entregado').length;
+      document.getElementById('kpi-active').textContent = shipments.filter((s) => s.status === 'En ruta').length;
+      const rev = shipments.reduce((acc, s) => acc + Number(s.amount), 0);
+      document.getElementById('kpi-rev').textContent = rev.toLocaleString('es-ES') + ' €';
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById('action-toast');
+      el.hidden = false;
+      el.textContent = msg;
+    }
+
+    window.markDelivered = function (id) {
+      const s = shipments.find((x) => x.id === id);
+      if (!s) return;
+      s.status = 'Entregado';
+      s.invoiced = true;
+      render();
+      showToast(`Albarán ${s.id} firmado digitalmente y enviado a facturación (${s.amount} €).`);
+    };
+
+    window.invoiceItem = function (id) {
+      const s = shipments.find((x) => x.id === id);
+      if (!s) return;
+      s.invoiced = true;
+      render();
+      showToast(`Factura emitida para ${s.client} (${s.amount} €).`);
+    };
+
+    document.querySelectorAll('.tab').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        activeFilter = btn.dataset.filter;
+        render();
+      });
+    });
+
+    document.getElementById('search-ship').addEventListener('input', render);
+
+    document.getElementById('new-route-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = 'ALB-' + (2601 + shipments.length);
+      shipments.unshift({
+        id,
+        client: document.getElementById('r-client').value.trim(),
+        city: document.getElementById('r-city').value.trim(),
+        driver: document.getElementById('r-driver').value.split('•')[0].trim(),
+        amount: Number(document.getElementById('r-amount').value),
+        status: 'En ruta',
+        invoiced: false
+      });
+      e.target.reset();
+      document.getElementById('r-amount').value = 240;
+      render();
+      showToast(`Ruta ${id} creada y enviada a la app del conductor.`);
+    });
+
+    document.getElementById('export-csv').addEventListener('click', () => {
+      const rows = [['Albaran', 'Cliente', 'Destino', 'Conductor', 'Importe', 'Estado']];
+      shipments.forEach((s) => rows.push([s.id, s.client, s.city, s.driver, s.amount, s.status]));
+      const csv = rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'albaranes-logiflow.csv';
+      a.click();
+    });
+
+    render();
+  </script>
+</body>
+</html>

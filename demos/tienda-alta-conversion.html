@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-T883SM5G"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tienda Online de Alta Conversión — Checkout en 1 Paso | Demo SafesaTech</title>
+  <meta name="description" content="Demo funcional de E-Commerce optimizado para móvil con stock ERP en tiempo real, cupones y checkout en un paso creado por SafesaTech.es." />
+  <link rel="canonical" href="https://safesatech.es/demos/tienda-alta-conversion.html" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+  <style>
+    :root {
+      --bg: #0D1015;
+      --surface: #141923;
+      --cyan: #00D2D3;
+      --green: #1DD1A1;
+      --blue: #0984E3;
+      --text: #FFFFFF;
+      --muted: #94A3B8;
+      --border: rgba(255, 255, 255, 0.09);
+    }
+    * { box-sizing: border-box; }
+    html { overflow-x: clip; }
+    body { margin: 0; font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; overflow-x: clip; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1180px; margin: 0 auto; padding-inline: 20px; }
+
+    .demo-topbar { background: #0A0D12; border-bottom: 1px solid rgba(0, 210, 211, 0.25); font-size: 0.84rem; padding: 10px 0; }
+    .demo-topbar__inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+    .demo-topbar__back { color: var(--cyan); font-weight: 600; }
+    .demo-topbar__cta { background: linear-gradient(135deg, var(--cyan), var(--blue)); color: #071017; font-weight: 700; padding: 6px 14px; border-radius: 999px; font-size: 0.8rem; }
+
+    .shop-hdr { padding: 20px 0; border-bottom: 1px solid var(--border); background: rgba(20,25,35,0.7); }
+    .shop-hdr__inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; }
+    .shop-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; margin: 0; }
+
+    .layout { padding: 28px 0 64px; display: grid; grid-template-columns: 1.35fr 0.85fr; gap: 24px; align-items: start; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .tab { background: var(--surface); border: 1px solid var(--border); color: var(--muted); padding: 8px 14px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; cursor: pointer; }
+    .tab.is-active { background: var(--cyan); color: #071017; border-color: var(--cyan); }
+
+    .prod-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .prod-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
+    .prod-art {
+      height: 132px; display: grid; place-items: center; font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif;
+      background: radial-gradient(circle at 25% 25%, rgba(0,210,211,0.22), transparent 60%), #0B0E14;
+      border-bottom: 1px solid var(--border); color: var(--cyan); font-size: 1.15rem;
+    }
+    .prod-body { padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .erp-stock { font-size: 0.74rem; color: var(--green); font-weight: 600; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 11px 16px; border-radius: 10px; font-weight: 700; font-size: 0.88rem;
+      border: 1px solid transparent; cursor: pointer; font-family: inherit;
+    }
+    .btn--primary { background: linear-gradient(135deg, var(--cyan), var(--blue)); color: #071017; }
+    .btn--ghost { background: rgba(255,255,255,0.05); border-color: var(--border); color: var(--text); }
+
+    .checkout-box { background: var(--surface); border: 1px solid rgba(0,210,211,0.3); border-radius: 18px; padding: 22px; position: sticky; top: 20px; }
+    .ship-bar { height: 7px; border-radius: 99px; background: rgba(255,255,255,0.08); overflow: hidden; margin: 6px 0 14px; }
+    .ship-bar span { display: block; height: 100%; background: linear-gradient(90deg, var(--cyan), var(--green)); transition: width 0.25s; }
+    .cart-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+    .qty-btn { width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--text); cursor: pointer; }
+    input, select { width: 100%; padding: 10px 12px; border-radius: 9px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; font-size: 0.88rem; }
+    .ok-box { margin-top: 12px; padding: 12px; border-radius: 10px; background: rgba(29,209,161,0.14); border: 1px solid rgba(29,209,161,0.35); font-size: 0.86rem; }
+
+    @media (max-width: 900px) {
+      .layout, .prod-grid { grid-template-columns: 1fr; }
+      .checkout-box { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-topbar">
+    <div class="container demo-topbar__inner">
+      <a href="/#proyectos" class="demo-topbar__back">← Volver a SafesaTech.es</a>
+      <span>Proyecto real interactivo: <strong>E-Commerce + Checkout en 1 Paso</strong></span>
+      <a href="/#contacto" class="demo-topbar__cta">Quiero una tienda así</a>
+    </div>
+  </div>
+
+  <header class="shop-hdr">
+    <div class="container shop-hdr__inner">
+      <div>
+        <h1 class="shop-title">Kinetik Store — E-Commerce de Alta Conversión</h1>
+        <span style="font-size:0.84rem;color:var(--muted);">Carga ultrarrápida • Stock ERP sincronizado • Envío gratis desde 80 € • Cupón: <strong>SAFESA15</strong></span>
+      </div>
+      <span style="font-size:0.86rem;color:var(--cyan);font-weight:700;">Productos en cesta: <span id="top-count">1</span></span>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <section>
+      <div class="tabs">
+        <button type="button" class="tab is-active" data-cat="todos">Todos</button>
+        <button type="button" class="tab" data-cat="Audio">Audio</button>
+        <button type="button" class="tab" data-cat="Wearables">Wearables</button>
+        <button type="button" class="tab" data-cat="Accesorios">Accesorios</button>
+      </div>
+      <div class="prod-grid" id="prod-grid"></div>
+    </section>
+
+    <aside class="checkout-box">
+      <h2 style="margin:0 0 6px;font-size:1.15rem;font-family:'Plus Jakarta Sans',sans-serif;">Checkout Express en 1 Paso</h2>
+      <div id="free-ship-txt" style="font-size:0.8rem;color:var(--muted);"></div>
+      <div class="ship-bar"><span id="ship-fill" style="width:0%"></span></div>
+
+      <div id="cart-items"></div>
+
+      <div style="display:flex;gap:8px;margin:14px 0;">
+        <input id="coupon-in" placeholder="Código descuento (SAFESA15)" />
+        <button type="button" id="coupon-btn" class="btn btn--ghost" style="padding:9px 12px;">Aplicar</button>
+      </div>
+
+      <form id="express-form" style="display:grid;gap:10px;">
+        <input id="c-name" required placeholder="Nombre completo" />
+        <input id="c-addr" required placeholder="Dirección de envío y CP" />
+        <select id="c-pay">
+          <option>Apple Pay / Google Pay (1 toque)</option>
+          <option>Tarjeta Visa / Mastercard</option>
+          <option>Bizum instantáneo</option>
+        </select>
+        <div style="display:flex;justify-content:space-between;font-weight:800;font-size:1.05rem;padding-top:4px;">
+          <span>Total a pagar</span>
+          <span id="total-el" style="color:var(--cyan);">0,00 €</span>
+        </div>
+        <button type="submit" class="btn btn--primary" style="width:100%;">Finalizar pedido ahora</button>
+      </form>
+      <div id="order-done" class="ok-box" hidden></div>
+    </aside>
+  </main>
+
+  <script>
+    const PRODUCTS = [
+      { id: 1, name: 'Auriculares ANC Pro X', cat: 'Audio', price: 89, stock: 14, tag: 'USB-C • 40h batería' },
+      { id: 2, name: 'Reloj Deportivo Pulse S2', cat: 'Wearables', price: 129, stock: 7, tag: 'GPS Dual • Sumergible' },
+      { id: 3, name: 'Cargador GaN 65W Compact', cat: 'Accesorios', price: 34, stock: 28, tag: 'Carga rápida portátil' },
+      { id: 4, name: 'Altavoz Bluetooth Studio', cat: 'Audio', price: 64, stock: 11, tag: '360° • Resistente al agua' }
+    ];
+
+    let activeCat = 'todos';
+    let discount = 0;
+    const cart = { 1: { ...PRODUCTS[0], qty: 1 } };
+
+    function renderProds() {
+      const list = PRODUCTS.filter((p) => activeCat === 'todos' || p.cat === activeCat);
+      document.getElementById('prod-grid').innerHTML = list.map((p) => `
+        <article class="prod-card">
+          <div class="prod-art">${p.cat}</div>
+          <div class="prod-body">
+            <div style="display:flex;justify-content:space-between;gap:8px;font-weight:700;">
+              <span>${p.name}</span>
+              <span style="color:var(--cyan);">${p.price} €</span>
+            </div>
+            <span style="font-size:0.84rem;color:var(--muted);">${p.tag}</span>
+            <span class="erp-stock">● Stock ERP en tiempo real: ${p.stock} uds.</span>
+            <button type="button" class="btn btn--ghost" style="margin-top:auto;" onclick="addProd(${p.id})">+ Añadir al checkout</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    window.addProd = function (id) {
+      const p = PRODUCTS.find((x) => x.id === id);
+      if (!p) return;
+      if (!cart[id]) cart[id] = { ...p, qty: 0 };
+      cart[id].qty += 1;
+      renderCart();
+    };
+
+    window.updQty = function (id, d) {
+      if (!cart[id]) return;
+      cart[id].qty += d;
+      if (cart[id].qty <= 0) delete cart[id];
+      renderCart();
+    };
+
+    function renderCart() {
+      const items = Object.values(cart);
+      document.getElementById('top-count').textContent = items.reduce((a, b) => a + b.qty, 0);
+      const wrap = document.getElementById('cart-items');
+
+      if (!items.length) {
+        wrap.innerHTML = '<p style="color:var(--muted);font-size:0.86rem;">Tu cesta está vacía.</p>';
+        document.getElementById('free-ship-txt').textContent = 'Envío gratis a partir de 80 €';
+        document.getElementById('ship-fill').style.width = '0%';
+        document.getElementById('total-el').textContent = '0,00 €';
+        return;
+      }
+
+      let subtotal = 0;
+      wrap.innerHTML = items.map((i) => {
+        subtotal += i.price * i.qty;
+        return `
+          <div class="cart-row">
+            <div><strong>${i.name}</strong><br><small style="color:var(--muted);">${i.price} € ud.</small></div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <button type="button" class="qty-btn" onclick="updQty(${i.id},-1)">−</button>
+              <span>${i.qty}</span>
+              <button type="button" class="qty-btn" onclick="updQty(${i.id},1)">+</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const pct = Math.min(100, Math.round((subtotal / 80) * 100));
+      document.getElementById('ship-fill').style.width = pct + '%';
+      const shipping = subtotal >= 80 ? 0 : 4.9;
+      document.getElementById('free-ship-txt').textContent = shipping === 0
+        ? '¡Envío express GRATIS desbloqueado!'
+        : `Te faltan ${(80 - subtotal).toFixed(2).replace('.', ',')} € para envío gratis (+4,90 € envío)`;
+
+      const total = subtotal * (1 - discount) + shipping;
+      document.getElementById('total-el').textContent = total.toFixed(2).replace('.', ',') + ' €' + (discount ? ' (-15%)' : '');
+    }
+
+    document.querySelectorAll('.tab').forEach((b) => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach((t) => t.classList.remove('is-active'));
+        b.classList.add('is-active');
+        activeCat = b.dataset.cat;
+        renderProds();
+      });
+    });
+
+    document.getElementById('coupon-btn').addEventListener('click', () => {
+      const code = document.getElementById('coupon-in').value.trim().toUpperCase();
+      discount = code === 'SAFESA15' ? 0.15 : 0;
+      renderCart();
+      const box = document.getElementById('order-done');
+      box.hidden = false;
+      box.textContent = discount ? 'Cupón SAFESA15 aplicado (15 % de descuento).' : 'Cupón inválido. Usa SAFESA15.';
+    });
+
+    document.getElementById('express-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const box = document.getElementById('order-done');
+      box.hidden = false;
+      if (!Object.keys(cart).length) {
+        box.textContent = 'Añade al menos un producto para finalizar.';
+        return;
+      }
+      const id = 'KIN-' + Math.floor(10000 + Math.random() * 90000);
+      box.innerHTML = `<strong>¡Pedido ${id} confirmado en 1 paso!</strong> Stock descontado del ERP y confirmación enviada.`;
+    });
+
+    renderProds();
+    renderCart();
+  </script>
+</body>
+</html>

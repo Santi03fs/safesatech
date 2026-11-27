@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-T883SM5G"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>App de Reservas y Fidelización Clínica — iOS &amp; Android | Demo SafesaTech</title>
+  <meta name="description" content="Demo interactiva de aplicación móvil para clínicas: reserva de citas en dos toques, recordatorios automáticos y área privada de pacientes desarrollada por SafesaTech.es." />
+  <link rel="canonical" href="https://safesatech.es/demos/app-clinica-reservas.html" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+  <style>
+    :root {
+      --bg: #0A0E14;
+      --phone-bg: #111723;
+      --card: #182132;
+      --teal: #1DD1A1;
+      --cyan: #00D2D3;
+      --blue: #0984E3;
+      --text: #FFFFFF;
+      --muted: #94A3B8;
+      --border: rgba(255, 255, 255, 0.09);
+    }
+    * { box-sizing: border-box; }
+    html { overflow-x: clip; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(29, 209, 161, 0.14), transparent 45%),
+                  radial-gradient(circle at 80% 80%, rgba(9, 132, 227, 0.16), transparent 45%), var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      min-height: 100vh;
+      overflow-x: clip;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1120px; margin: 0 auto; padding-inline: 20px; }
+
+    .demo-topbar { background: #0D1015; border-bottom: 1px solid rgba(0, 210, 211, 0.25); font-size: 0.84rem; padding: 10px 0; }
+    .demo-topbar__inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+    .demo-topbar__back { color: var(--cyan); font-weight: 600; }
+    .demo-topbar__cta { background: linear-gradient(135deg, var(--cyan), var(--blue)); color: #071017; font-weight: 700; padding: 6px 14px; border-radius: 999px; font-size: 0.8rem; }
+
+    .stage {
+      padding: 40px 0 64px;
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 44px;
+      align-items: center;
+    }
+    .eyebrow { color: var(--teal); text-transform: uppercase; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; display: block; margin-bottom: 10px; }
+    h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.9rem, 3.6vw, 2.8rem); line-height: 1.15; margin: 0 0 16px; }
+    .feature-list { list-style: none; padding: 0; margin: 22px 0 28px; display: grid; gap: 12px; color: var(--muted); }
+    .feature-list li::before { content: '✓ '; color: var(--teal); font-weight: 800; }
+
+    /* Marco realista de App Móvil */
+    .phone-frame {
+      width: 100%;
+      max-width: 390px;
+      margin-inline: auto;
+      background: var(--phone-bg);
+      border: 2px solid rgba(0, 210, 211, 0.35);
+      border-radius: 34px;
+      padding: 14px;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.65);
+    }
+    .phone-notch { width: 110px; height: 6px; border-radius: 99px; background: rgba(255,255,255,0.16); margin: 2px auto 14px; }
+    .phone-screen {
+      background: #0D121B;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 580px;
+    }
+    .app-bar {
+      padding: 16px 18px;
+      background: linear-gradient(135deg, rgba(29,209,161,0.14), rgba(9,132,227,0.14));
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .app-body { padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
+    .app-tabs {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+      background: #0A0E15;
+    }
+    .app-tab {
+      background: none; border: 0; color: var(--muted); padding: 13px 6px;
+      font: inherit; font-size: 0.78rem; font-weight: 600; cursor: pointer;
+    }
+    .app-tab.is-active { color: var(--teal); background: rgba(29, 209, 161, 0.08); }
+
+    .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .spec-btn {
+      padding: 12px 10px; border-radius: 12px; border: 1px solid var(--border);
+      background: var(--card); color: var(--text); font: inherit; font-size: 0.84rem;
+      font-weight: 600; cursor: pointer; text-align: left;
+    }
+    .spec-btn.is-active { border-color: var(--teal); background: rgba(29, 209, 161, 0.14); }
+    .slots-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .slot-btn {
+      padding: 9px 6px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--card); color: var(--text); font: inherit; font-size: 0.82rem; cursor: pointer;
+    }
+    .slot-btn.is-active { background: var(--teal); color: #051610; font-weight: 700; border-color: var(--teal); }
+    .app-btn {
+      width: 100%; padding: 13px; border-radius: 12px; border: 0; font: inherit; font-weight: 700;
+      background: linear-gradient(135deg, var(--teal), var(--cyan)); color: #051513; cursor: pointer;
+    }
+    .cita-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 13px; display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 0.85rem;
+    }
+    .mini-cancel { background: rgba(239,68,68,0.16); border: 1px solid rgba(239,68,68,0.35); color: #FCA5A5; border-radius: 8px; padding: 5px 9px; font-size: 0.75rem; cursor: pointer; }
+    .loyalty-bar { height: 9px; border-radius: 99px; background: rgba(255,255,255,0.1); overflow: hidden; margin-top: 8px; }
+    .loyalty-bar span { display: block; height: 100%; background: linear-gradient(90deg, var(--teal), var(--blue)); }
+    .msg-ok { padding: 11px; border-radius: 10px; background: rgba(29,209,161,0.15); border: 1px solid rgba(29,209,161,0.35); font-size: 0.83rem; }
+
+    @media (max-width: 860px) {
+      .stage { grid-template-columns: 1fr; padding-top: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-topbar">
+    <div class="container demo-topbar__inner">
+      <a href="/#proyectos" class="demo-topbar__back">← Volver a SafesaTech.es</a>
+      <span>Proyecto real interactivo: <strong>App Móvil iOS &amp; Android — Salud y Citas</strong></span>
+      <a href="/#contacto" class="demo-topbar__cta">Quiero una app así</a>
+    </div>
+  </div>
+
+  <main class="container stage">
+    <div>
+      <span class="eyebrow">App Móvil iOS &amp; Android</span>
+      <h1>App de Reservas y Fidelización Clínica</h1>
+      <p style="color:var(--muted);">
+        Interactúa con esta app móvil simulada igual que un paciente real: reserva en dos toques, gestiona tus citas con recordatorios automáticos y consulta tus puntos de fidelización.
+      </p>
+      <ul class="feature-list">
+        <li>Reserva en dos toques sin llamadas ni esperas telefónicas.</li>
+        <li>Recordatorios push/SMS automáticos 24h antes (reduce el absentismo).</li>
+        <li>Área privada de pacientes con historial y tarjeta de puntos.</li>
+      </ul>
+      <a href="/#contacto" style="display:inline-flex;padding:13px 22px;border-radius:999px;background:linear-gradient(135deg,#00D2D3,#0984E3);color:#071017;font-weight:700;">Solicitar presupuesto de app móvil</a>
+    </div>
+
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="app-bar">
+          <div>
+            <strong style="font-size:0.96rem;">Clínica VitalSalud</strong>
+            <div style="font-size:0.74rem;color:var(--teal);">Paciente: Marta García</div>
+          </div>
+          <span style="font-size:0.74rem;background:rgba(29,209,161,0.15);color:var(--teal);padding:4px 9px;border-radius:999px;font-weight:700;" id="pts-badge">340 pts</span>
+        </div>
+
+        <div class="app-body" id="app-body"></div>
+
+        <nav class="app-tabs" aria-label="Menú app móvil">
+          <button type="button" class="app-tab is-active" data-tab="reservar">Pedir Cita</button>
+          <button type="button" class="app-tab" data-tab="citas">Mis Citas</button>
+          <button type="button" class="app-tab" data-tab="perfil">Área Paciente</button>
+        </nav>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const SPECIALTIES = [
+      { name: 'Odontología', doc: 'Dra. Lucía Vega' },
+      { name: 'Fisioterapia', doc: 'Pablo Serrano' },
+      { name: 'Dermatología', doc: 'Dr. Hugo Díaz' },
+      { name: 'Medicina General', doc: 'Dra. Ana Torres' }
+    ];
+    const HOURS = ['10:00', '11:30', '13:00', '17:00', '18:30', '19:45'];
+    const appointments = [
+      { id: 1, spec: 'Fisioterapia', doc: 'Pablo Serrano', date: 'Mañana', hour: '18:30', reminder: true }
+    ];
+
+    let tab = 'reservar';
+    let selSpec = SPECIALTIES[0];
+    let selHour = HOURS[1];
+    let points = 340;
+    let lastNotice = '';
+
+    function render() {
+      document.getElementById('pts-badge').textContent = `${points} pts`;
+      const body = document.getElementById('app-body');
+
+      if (tab === 'reservar') {
+        body.innerHTML = `
+          <div>
+            <div style="font-size:0.78rem;color:var(--muted);margin-bottom:6px;font-weight:600;">1. Elige especialidad</div>
+            <div class="spec-grid">
+              ${SPECIALTIES.map((s) => `
+                <button type="button" class="spec-btn ${selSpec.name === s.name ? 'is-active' : ''}" onclick="pickSpec('${s.name}')">
+                  ${s.name}<br><small style="color:var(--muted);font-weight:400;">${s.doc}</small>
+                </button>
+              `).join('')}
+            </div>
+          </div>
+          <div>
+            <div style="font-size:0.78rem;color:var(--muted);margin-bottom:6px;font-weight:600;">2. Elige hora disponible (Próximo día hábil)</div>
+            <div class="slots-grid">
+              ${HOURS.map((h) => `<button type="button" class="slot-btn ${selHour === h ? 'is-active' : ''}" onclick="pickHour('${h}')">${h}</button>`).join('')}
+            </div>
+          </div>
+          <label style="display:flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--muted);">
+            <input type="checkbox" id="rem-check" checked /> Activar recordatorio automático 24h antes
+          </label>
+          <button type="button" class="app-btn" onclick="bookNow()">Confirmar cita en 1 toque</button>
+          ${lastNotice ? `<div class="msg-ok">${lastNotice}</div>` : ''}
+        `;
+      } else if (tab === 'citas') {
+        body.innerHTML = `
+          <div style="font-size:0.86rem;font-weight:700;">Próximas citas (${appointments.length})</div>
+          ${appointments.length ? appointments.map((a) => `
+            <div class="cita-card">
+              <div>
+                <strong>${a.spec}</strong><br>
+                <small style="color:var(--muted);">${a.doc} • ${a.date} ${a.hour}</small><br>
+                <small style="color:var(--teal);">${a.reminder ? '🔔 Recordatorio activo' : 'Sin recordatorio'}</small>
+              </div>
+              <button type="button" class="mini-cancel" onclick="cancelCita(${a.id})">Anular</button>
+            </div>
+          `).join('') : '<p style="color:var(--muted);font-size:0.85rem;">No tienes citas pendientes. Reserva una desde "Pedir Cita".</p>'}
+        `;
+      } else {
+        const pct = Math.min(100, Math.round((points / 500) * 100));
+        body.innerHTML = `
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:15px;">
+            <div style="display:flex;justify-content:space-between;font-size:0.86rem;">
+              <strong>Club Salud Vital</strong>
+              <span style="color:var(--teal);font-weight:700;">${points} / 500 pts</span>
+            </div>
+            <div class="loyalty-bar"><span style="width:${pct}%"></span></div>
+            <p style="margin:8px 0 0;font-size:0.78rem;color:var(--muted);">Acumulas +50 pts por cada cita reservada desde la app. Al llegar a 500 pts obtienes limpieza o sesión gratuita.</p>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:15px;font-size:0.84rem;">
+            <strong>Últimos informes disponibles</strong>
+            <p style="margin:8px 0 0;color:var(--muted);">• Revisión anual dental (PDF disponible)<br>• Plan rehabilitación lumbar (Activo)</p>
+          </div>
+        `;
+      }
+    }
+
+    window.pickSpec = function (name) { selSpec = SPECIALTIES.find((s) => s.name === name); lastNotice = ''; render(); };
+    window.pickHour = function (h) { selHour = h; lastNotice = ''; render(); };
+    window.bookNow = function () {
+      const rem = document.getElementById('rem-check').checked;
+      appointments.unshift({ id: Date.now(), spec: selSpec.name, doc: selSpec.doc, date: 'Próximo día hábil', hour: selHour, reminder: rem });
+      points += 50;
+      lastNotice = `¡Cita confirmada! ${selSpec.name} a las ${selHour} (+50 puntos añadidos).`;
+      render();
+    };
+    window.cancelCita = function (id) {
+      const idx = appointments.findIndex((a) => a.id === id);
+      if (idx >= 0) appointments.splice(idx, 1);
+      render();
+    };
+
+    document.querySelectorAll('.app-tab').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.app-tab').forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        tab = btn.dataset.tab;
+        lastNotice = '';
+        render();
+      });
+    });
+
+    render();
+  </script>
+</body>
+</html>
