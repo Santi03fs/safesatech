@@ -1,9 +1,15 @@
 <?php
 /**
- * Envío de correos por SMTP (si está configurado) o PHP mail().
+ * Envío de correos por SMTP (si está configurado) o PHP mail(), con diagnóstico detallado.
  */
 
 function send_lead_email(string $nombre, string $replyEmail, string $tipoProyecto, string $mensaje): bool
+{
+    $res = send_lead_email_with_debug($nombre, $replyEmail, $tipoProyecto, $mensaje);
+    return $res['ok'];
+}
+
+function send_lead_email_with_debug(string $nombre, string $replyEmail, string $tipoProyecto, string $mensaje): array
 {
     $to = defined('CONTACT_RECIPIENT') ? CONTACT_RECIPIENT : 'safesatech@gmail.com';
     $from = defined('CONTACT_FROM') ? CONTACT_FROM : 'noreply@safesatech.es';
@@ -31,6 +37,7 @@ function send_lead_email(string $nombre, string $replyEmail, string $tipoProyect
       </body>
     </html>";
 
+    $smtpError = '';
     if (
         defined('SMTP_HOST') && SMTP_HOST !== '' &&
         defined('SMTP_USER') && SMTP_USER !== '' &&
@@ -38,9 +45,16 @@ function send_lead_email(string $nombre, string $replyEmail, string $tipoProyect
     ) {
         $port = defined('SMTP_PORT') ? (int) SMTP_PORT : 587;
         $secure = defined('SMTP_SECURE') ? strtolower((string) SMTP_SECURE) : 'tls';
-        if (smtp_send_raw(SMTP_HOST, $port, $secure, SMTP_USER, SMTP_PASS, $from, $to, $replyEmail, $subject, $htmlBody)) {
-            return true;
+        $pass = (string) SMTP_PASS;
+        if (stripos((string) SMTP_HOST, 'gmail.com') !== false) {
+            $pass = str_replace(' ', '', $pass);
         }
+
+        $smtpRes = smtp_send_raw(SMTP_HOST, $port, $secure, SMTP_USER, $pass, $from, $to, $replyEmail, $subject, $htmlBody);
+        if ($smtpRes['ok']) {
+            return ['ok' => true, 'method' => 'SMTP (' . SMTP_HOST . ')', 'error' => ''];
+        }
+        $smtpError = $smtpRes['error'];
     }
 
     $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
@@ -51,8 +65,19 @@ function send_lead_email(string $nombre, string $replyEmail, string $tipoProyect
         'Reply-To: ' . $nombre . ' <' . $replyEmail . '>',
         'X-Mailer: PHP/' . phpversion(),
     ];
+    $headerStr = implode("\r\n", $headers);
 
-    return @mail($to, $encodedSubject, $htmlBody, implode("\r\n", $headers), '-f ' . $from);
+    if (@mail($to, $encodedSubject, $htmlBody, $headerStr, '-f ' . $from)) {
+        return ['ok' => true, 'method' => 'PHP mail() (-f)', 'error' => ''];
+    }
+
+    if (@mail($to, $encodedSubject, $htmlBody, $headerStr)) {
+        return ['ok' => true, 'method' => 'PHP mail()', 'error' => ''];
+    }
+
+    $lastErr = error_get_last()['message'] ?? 'PHP mail() devolvió false';
+    $combinedErr = $smtpError !== '' ? ("SMTP: {$smtpError} | mail(): {$lastErr}") : $lastErr;
+    return ['ok' => false, 'method' => 'ninguno', 'error' => $combinedErr];
 }
 
 function smtp_send_raw(
@@ -66,12 +91,13 @@ function smtp_send_raw(
     string $replyTo,
     string $subject,
     string $htmlBody
-): bool {
+): array {
     $transportHost = ($secure === 'ssl') ? "ssl://{$host}" : $host;
     $socket = @stream_socket_client("{$transportHost}:{$port}", $errno, $errstr, 12);
     if (!$socket) {
-        return false;
+        return ['ok' => false, 'error' => "No se pudo conectar a {$transportHost}:{$port} ({$errno}: {$errstr})"];
     }
+    stream_set_timeout($socket, 12);
 
     $read = function () use ($socket): string {
         $data = '';
@@ -81,50 +107,55 @@ function smtp_send_raw(
                 break;
             }
         }
-        return $data;
+        return trim($data);
     };
 
-    $cmd = function (string $command, array $expectedCodes) use ($socket, $read): bool {
+    $lastResp = '';
+    $cmd = function (string $command, array $expectedCodes) use ($socket, $read, &$lastResp): bool {
         fwrite($socket, $command . "\r\n");
-        $resp = $read();
-        $code = (int) substr($resp, 0, 3);
+        $lastResp = $read();
+        $code = (int) substr($lastResp, 0, 3);
         return in_array($code, $expectedCodes, true);
     };
 
     $greeting = $read();
     if ((int) substr($greeting, 0, 3) !== 220) {
         fclose($socket);
-        return false;
+        return ['ok' => false, 'error' => "Saludo SMTP inesperado: {$greeting}"];
     }
 
     $domain = 'safesatech.es';
     if (!$cmd("EHLO {$domain}", [250])) {
         fclose($socket);
-        return false;
+        return ['ok' => false, 'error' => "EHLO rechazado: {$lastResp}"];
     }
 
     if ($secure === 'tls') {
         if (!$cmd('STARTTLS', [220])) {
             fclose($socket);
-            return false;
+            return ['ok' => false, 'error' => "STARTTLS falló: {$lastResp}"];
         }
         if (!@stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
             fclose($socket);
-            return false;
+            return ['ok' => false, 'error' => 'No se pudo iniciar cifrado TLS.'];
         }
         if (!$cmd("EHLO {$domain}", [250])) {
             fclose($socket);
-            return false;
+            return ['ok' => false, 'error' => "EHLO tras TLS falló: {$lastResp}"];
         }
     }
 
-    if (
-        !$cmd('AUTH LOGIN', [334]) ||
-        !$cmd(base64_encode($user), [334]) ||
-        !$cmd(base64_encode($pass), [235])
-    ) {
+    if (!$cmd('AUTH LOGIN', [334])) {
         fclose($socket);
-        return false;
+        return ['ok' => false, 'error' => "AUTH LOGIN rechazado: {$lastResp}"];
+    }
+    if (!$cmd(base64_encode($user), [334])) {
+        fclose($socket);
+        return ['ok' => false, 'error' => "Usuario SMTP rechazado: {$lastResp}"];
+    }
+    if (!$cmd(base64_encode($pass), [235])) {
+        fclose($socket);
+        return ['ok' => false, 'error' => "Contraseña SMTP rechazada: {$lastResp}"];
     }
 
     $sender = filter_var($user, FILTER_VALIDATE_EMAIL) ? $user : $from;
@@ -134,7 +165,7 @@ function smtp_send_raw(
         !$cmd('DATA', [354])
     ) {
         fclose($socket);
-        return false;
+        return ['ok' => false, 'error' => "Error en remitente/destinatario: {$lastResp}"];
     }
 
     $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
@@ -159,5 +190,7 @@ function smtp_send_raw(
     fwrite($socket, "QUIT\r\n");
     fclose($socket);
 
-    return $ok;
+    return $ok
+        ? ['ok' => true, 'error' => '']
+        : ['ok' => false, 'error' => "Error al enviar cuerpo del correo: {$dataResp}"];
 }

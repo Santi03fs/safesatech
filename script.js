@@ -211,7 +211,7 @@ function initContactForm() {
   const email = document.getElementById('email');
   const tipo = document.getElementById('tipo-proyecto');
   const mensaje = document.getElementById('mensaje');
-  const website = document.getElementById('website');
+  const honeypot = document.getElementById('hp_company_url');
   const feedback = document.getElementById('form-feedback');
   const submitBtn = document.getElementById('submit-btn');
   const submitBtnText = document.getElementById('submit-btn-text');
@@ -310,7 +310,7 @@ function initContactForm() {
           email: clientEmail,
           tipoProyecto: projectType,
           mensaje: messageText,
-          website: website ? website.value : '',
+          hp_company_url: honeypot ? honeypot.value : '',
         }),
       });
 

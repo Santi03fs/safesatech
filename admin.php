@@ -304,6 +304,9 @@ if ($isLoggedIn) {
             $smtpUser = trim((string) ($_POST['smtp_user'] ?? ''));
             $rawSmtpPass = (string) ($_POST['smtp_pass'] ?? '');
             $smtpPass = $rawSmtpPass !== '' ? $rawSmtpPass : (defined('SMTP_PASS') ? SMTP_PASS : '');
+            if (stripos($smtpHost, 'gmail.com') !== false) {
+                $smtpPass = str_replace(' ', '', $smtpPass);
+            }
             $smtpSecure = in_array($_POST['smtp_secure'] ?? 'tls', ['tls', 'ssl'], true) ? $_POST['smtp_secure'] : 'tls';
 
             if (!filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
@@ -328,6 +331,19 @@ if ($isLoggedIn) {
                 } else {
                     $flashError = 'No se pudo actualizar api/config.local.php.';
                 }
+            }
+        } elseif ($action === 'test_email') {
+            require_once __DIR__ . '/api/mailer.php';
+            $testRes = send_lead_email_with_debug(
+                'Prueba SafesaTech',
+                CONTACT_RECIPIENT,
+                'Prueba de correo',
+                'Este es un correo de prueba enviado desde el panel admin.php de SafesaTech.es.'
+            );
+            if ($testRes['ok']) {
+                $flashSuccess = 'Correo de prueba enviado a ' . CONTACT_RECIPIENT . ' usando ' . $testRes['method'] . '.';
+            } else {
+                $flashError = 'No se pudo enviar el correo de prueba: ' . $testRes['error'];
             }
         }
     }
@@ -620,11 +636,11 @@ if ($isLoggedIn) {
           <div class="form-row-2">
             <div class="form-group">
               <label class="form-label" for="smtp_user">Usuario SMTP</label>
-              <input id="smtp_user" name="smtp_user" class="form-control" value="<?= h(defined('SMTP_USER') ? SMTP_USER : '') ?>" />
+              <input id="smtp_user" name="smtp_user" class="form-control" autocomplete="off" placeholder="ej. safesatech@gmail.com o noreply@safesatech.es" value="<?= h(defined('SMTP_USER') ? SMTP_USER : '') ?>" />
             </div>
             <div class="form-group">
               <label class="form-label" for="smtp_pass">Contraseña SMTP / App Password</label>
-              <input id="smtp_pass" name="smtp_pass" type="password" class="form-control" placeholder="Dejar igual si no cambia" />
+              <input id="smtp_pass" name="smtp_pass" type="password" class="form-control" autocomplete="new-password" placeholder="Dejar igual si no cambia" />
             </div>
           </div>
           <div class="form-row-2">
@@ -640,7 +656,14 @@ if ($isLoggedIn) {
               </select>
             </div>
           </div>
-          <button type="submit" class="btn btn--gradient-border">Guardar ajustes de correo</button>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;">
+            <button type="submit" class="btn btn--gradient-border">Guardar ajustes de correo</button>
+          </div>
+        </form>
+        <form method="POST" style="margin-top:14px;">
+          <input type="hidden" name="csrf_token" value="<?= h($csrfToken) ?>" />
+          <input type="hidden" name="action" value="test_email" />
+          <button type="submit" class="btn btn--ghost btn--sm">Probar envío de correo a <?= h(CONTACT_RECIPIENT) ?></button>
         </form>
       </section>
     <?php endif; ?>

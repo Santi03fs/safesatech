@@ -51,10 +51,13 @@ Options -Indexes
 </IfModule>
 
 <IfModule mod_headers.c>
-  <FilesMatch "\.(css|js|png|jpg|jpeg|webp|avif|svg)$">
+  <FilesMatch "\.(png|jpg|jpeg|webp|avif|svg)$">
     Header set Cache-Control "public, max-age=2592000"
   </FilesMatch>
-  <FilesMatch "\.(php)$">
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=300, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(php|html)$">
     Header set Cache-Control "no-store, no-cache, must-revalidate"
   </FilesMatch>
 </IfModule>

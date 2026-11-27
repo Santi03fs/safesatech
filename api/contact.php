@@ -24,7 +24,7 @@ if (!is_array($data)) {
 }
 
 // Honeypot antispam
-if (!empty($data['website'] ?? '')) {
+if (!empty($data['hp_company_url'] ?? '') || !empty($data['website'] ?? '')) {
     echo json_encode(['ok' => true, 'message' => 'Consulta recibida.']);
     exit;
 }
