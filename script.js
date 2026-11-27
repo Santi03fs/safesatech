@@ -3,15 +3,50 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initScrollProgress();
   initNavbarScroll();
   initMobileMenu();
   initActiveSectionLinks();
   initScrollReveal();
+  initCardSpotlight();
   initServicePreselect();
   initDynamicProjects();
   initContactForm();
   initLegalModal();
 });
+
+/**
+ * Barra superior de progreso de lectura.
+ */
+function initScrollProgress() {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+
+  const update = () => {
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    bar.style.transform = `scaleX(${pct})`;
+  };
+
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+}
+
+/**
+ * Brillo interactivo suave siguiendo el cursor en tarjetas (solo escritorio).
+ */
+function initCardSpotlight() {
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+  const cards = document.querySelectorAll('.service-card, .why-card, .process-step, .project-card, .demo-card');
+  cards.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+      card.style.setProperty('--my', `${e.clientY - rect.top}px`);
+    });
+  });
+}
 
 /**
  * Aplica estilo glassmorphism al navbar cuando hay desplazamiento vertical.
