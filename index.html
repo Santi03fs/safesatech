@@ -1,34 +1,160 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-ES">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SafesaTech — Estudio Digital de Apps y Web | España</title>
+  <title>SafesaTech — Desarrollo Web, Apps Móviles y Software a Medida en España</title>
   <meta
     name="description"
-    content="SafesaTech.es: Estudio digital de desarrollo web, aplicaciones móviles iOS y Android y software a medida en España. Soluciones rápidas, escalables y orientadas a resultados."
+    content="Estudio digital en España especializado en desarrollo web corporativo, landing pages, aplicaciones móviles iOS y Android y software a medida rápido y orientado a conversión."
   />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="author" content="SafesaTech" />
   <meta name="theme-color" content="#0D1015" />
 
-  <!-- Tipografía geométrica moderna -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
-    rel="stylesheet"
-  />
+  <!-- URL canónica e idioma -->
+  <link rel="canonical" href="https://safesatech.es/" />
+  <link rel="alternate" hreflang="es-ES" href="https://safesatech.es/" />
+  <link rel="alternate" hreflang="x-default" href="https://safesatech.es/" />
 
-  <!-- Favicon SVG inline con isotipo SF -->
+  <!-- Open Graph / Redes sociales -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="SafesaTech" />
+  <meta property="og:url" content="https://safesatech.es/" />
+  <meta property="og:title" content="SafesaTech — Estudio Digital de Apps y Web en España" />
+  <meta
+    property="og:description"
+    content="Transformamos tus ideas en webs y apps que hacen crecer tu negocio. Desarrollo web, iOS/Android y software a medida sin intermediarios."
+  />
+  <meta property="og:image" content="https://safesatech.es/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="SafesaTech — Estudio Digital de Apps y Web en España" />
+
+  <!-- Twitter / X Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SafesaTech — Desarrollo Web, Apps y Software a Medida" />
+  <meta
+    name="twitter:description"
+    content="Plataformas web a medida, aplicaciones móviles y software empresarial rápido, escalable y orientado a resultados."
+  />
+  <meta name="twitter:image" content="https://safesatech.es/og-image.png" />
+
+  <!-- Iconos y PWA Manifest -->
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link
     rel="icon"
     type="image/svg+xml"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%2300D2D3'/%3E%3Cstop offset='50%25' stop-color='%231DD1A1'/%3E%3Cstop offset='100%25' stop-color='%230984E3'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='40' height='40' rx='10' fill='%23141923'/%3E%3Cpath d='M10 14.5C10 12 12 10 14.5 10H22V14H14.5C14.2 14 14 14.2 14 14.5V16.5C14 16.8 14.2 17 14.5 17H19.5C22 17 24 19 24 21.5V25.5C24 28 22 30 19.5 30H10V26H19.5C19.8 26 20 25.8 20 25.5V21.5C20 21.2 19.8 21 19.5 21H14.5C12 21 10 19 10 16.5V14.5Z' fill='url(%23g)'/%3E%3Cpath d='M25 10H31V14H28V18H30.5V22H28V30H25V10Z' fill='%23FFFFFF'/%3E%3C/svg%3E"
   />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Tipografía no bloqueante para optimizar PageSpeed Mobile (LCP/FCP) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    media="print"
+    onload="this.media='all'"
+  />
+  <noscript>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    />
+  </noscript>
 
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Datos estructurados Schema.org (SEO avanzado Google) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://safesatech.es/#organization",
+          "name": "SafesaTech",
+          "alternateName": "SafesaTech Estudio Digital",
+          "url": "https://safesatech.es/",
+          "logo": "https://safesatech.es/favicon-192.png",
+          "image": "https://safesatech.es/og-image.png",
+          "email": "safesatech@gmail.com",
+          "description": "Estudio digital en España especializado en desarrollo web corporativo, landing pages, aplicaciones móviles iOS y Android y software empresarial a medida.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "ES"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "España"
+          },
+          "serviceType": [
+            "Desarrollo Web Corporativo y Landing Pages",
+            "Aplicaciones Móviles iOS y Android",
+            "Web Apps y Software a Medida",
+            "Mantenimiento y Optimización Web"
+          ],
+          "priceRange": "€€"
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://safesatech.es/#website",
+          "url": "https://safesatech.es/",
+          "name": "SafesaTech",
+          "inLanguage": "es-ES",
+          "publisher": {
+            "@id": "https://safesatech.es/#organization"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://safesatech.es/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cuánto tarda en estar lista una página web o aplicación?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Una landing page o web corporativa suele entregarse en 2 a 3 semanas. Para web apps, software a medida o aplicaciones móviles iOS y Android, definimos un calendario por hitos semanales con entregas visibles desde la primera semana."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Trabajáis en toda España?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. Operamos en remoto en toda España (Madrid, Barcelona, Valencia, Sevilla, Bilbao y cualquier provincia), manteniendo trato directo por videollamada, teléfono y correo."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿El código fuente, el dominio y la web son 100 % propiedad del cliente?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. Desde el primer día tanto tu dominio como el hosting y todo el código desarrollado a medida pertenecen íntegramente a tu empresa, sin ataduras ni licencias ocultas."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo puedo solicitar un presupuesto sin compromiso?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Rellena el formulario de contacto en safesatech.es o escríbenos a safesatech@gmail.com. Analizamos tu caso y te enviamos una propuesta detallada en menos de 24 horas."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  </script>
 </head>
 <body>
-  <!-- Fondos ambientales sutiles -->
+  <!-- Fondos ambientales ligeros -->
   <div class="ambient-bg" aria-hidden="true">
     <div class="ambient-glow ambient-glow--tl"></div>
     <div class="ambient-glow ambient-glow--mr"></div>
@@ -40,8 +166,7 @@
     <div class="container navbar__inner">
       <a href="#inicio" class="brand" aria-label="SafesaTech — Inicio">
         <span class="brand__mark" aria-hidden="true">
-          <!-- Isotipo SF -->
-          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="sf-grad" x1="4" y1="4" x2="36" y2="36" gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stop-color="#00D2D3" />
@@ -50,16 +175,11 @@
               </linearGradient>
             </defs>
             <rect x="1" y="1" width="38" height="38" rx="10" fill="#141923" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" />
-            <!-- S estilizada -->
             <path
               d="M9.5 14.5C9.5 11.7386 11.7386 9.5 14.5 9.5H21.5V13.5H14.5C13.9477 13.5 13.5 13.9477 13.5 14.5V16.8C13.5 17.3523 13.9477 17.8 14.5 17.8H18.5C21.2614 17.8 23.5 20.0386 23.5 22.8V25.5C23.5 28.2614 21.2614 30.5 18.5 30.5H9.5V26.5H18.5C19.0523 26.5 19.5 26.0523 19.5 25.5V22.8C19.5 22.2477 19.0523 21.8 18.5 21.8H14.5C11.7386 21.8 9.5 19.5614 9.5 16.8V14.5Z"
               fill="url(#sf-grad)"
             />
-            <!-- F geométrica -->
-            <path
-              d="M25.5 9.5H31.5V13.5H29V18H31V21.8H29V30.5H25.5V9.5Z"
-              fill="#FFFFFF"
-            />
+            <path d="M25.5 9.5H31.5V13.5H29V18H31V21.8H29V30.5H25.5V9.5Z" fill="#FFFFFF" />
           </svg>
         </span>
         <span class="brand__text">
@@ -108,10 +228,10 @@
   </header>
 
   <main id="inicio">
-    <!-- 2. HERO SECTION -->
+    <!-- 2. HERO SECTION (Renderizado inmediato sin opacidad 0 para máximo LCP móvil) -->
     <section class="hero section">
       <div class="container hero__grid">
-        <div class="hero__content" data-reveal>
+        <div class="hero__content">
           <div class="badge">
             <span class="badge__dot" aria-hidden="true"></span>
             <span>Estudio Digital de Apps y Web • España</span>
@@ -157,13 +277,12 @@
           </div>
         </div>
 
-        <!-- Elemento visual derecha: Composición moderna web + móvil en modo oscuro -->
-        <div class="hero__visual" data-reveal data-reveal-delay="120" aria-hidden="true">
+        <!-- Elemento visual derecha -->
+        <div class="hero__visual" aria-hidden="true">
           <div class="hero-stage">
             <div class="hero-stage__glow hero-stage__glow--cyan"></div>
             <div class="hero-stage__glow hero-stage__glow--blue"></div>
 
-            <!-- Ventana Web App / SaaS -->
             <div class="mockup-browser glass-card">
               <div class="mockup-browser__bar">
                 <div class="mockup-dots">
@@ -199,13 +318,12 @@
                     </div>
                   </div>
 
-                  <!-- Gráfico SVG estilizado -->
                   <div class="mockup-chart">
                     <div class="mockup-chart__header">
                       <span>Rendimiento del producto</span>
                       <span class="mockup-chart__pill">Tiempo real</span>
                     </div>
-                    <svg viewBox="0 0 320 110" class="chart-svg" fill="none">
+                    <svg viewBox="0 0 320 110" width="320" height="110" class="chart-svg" fill="none">
                       <defs>
                         <linearGradient id="chart-fill" x1="0" y1="0" x2="0" y2="110" gradientUnits="userSpaceOnUse">
                           <stop offset="0%" stop-color="#00D2D3" stop-opacity="0.32" />
@@ -234,7 +352,6 @@
                     </svg>
                   </div>
 
-                  <!-- Snippet de código limpio -->
                   <div class="mockup-code">
                     <code><span class="c-muted">const</span> <span class="c-cyan">deploy</span> = <span class="c-green">await</span> safesa.<span class="c-blue">launch</span>({ scale: <span class="c-white">'auto'</span> });</code>
                   </div>
@@ -242,7 +359,6 @@
               </div>
             </div>
 
-            <!-- Mockup Móvil superpuesto -->
             <div class="mockup-phone glass-card">
               <div class="mockup-phone__notch"></div>
               <div class="mockup-phone__screen">
@@ -272,7 +388,6 @@
               </div>
             </div>
 
-            <!-- Tarjeta flotante de rendimiento -->
             <div class="mockup-float glass-card">
               <div class="mockup-float__icon">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -301,7 +416,6 @@
         </div>
 
         <div class="services-grid">
-          <!-- Tarjeta 1 -->
           <article class="service-card glass-card" data-reveal>
             <div class="service-card__icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -323,7 +437,6 @@
             </a>
           </article>
 
-          <!-- Tarjeta 2 -->
           <article class="service-card glass-card" data-reveal data-reveal-delay="80">
             <div class="service-card__icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -344,7 +457,6 @@
             </a>
           </article>
 
-          <!-- Tarjeta 3 -->
           <article class="service-card glass-card" data-reveal data-reveal-delay="160">
             <div class="service-card__icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -366,7 +478,6 @@
             </a>
           </article>
 
-          <!-- Tarjeta 4 -->
           <article class="service-card glass-card" data-reveal data-reveal-delay="240">
             <div class="service-card__icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -507,7 +618,7 @@
       </div>
     </section>
 
-    <!-- 6. SECCIÓN DE PROYECTOS / PORTFOLIO (PLACEHOLDER EDITABLE) -->
+    <!-- 6. SECCIÓN DE PROYECTOS / PORTFOLIO (DINÁMICO DESDE BD + PLACEHOLDERS) -->
     <section class="section" id="proyectos">
       <div class="container">
         <div class="section-header section-header--split" data-reveal>
@@ -515,16 +626,15 @@
             <span class="section-eyebrow">Portfolio</span>
             <h2 class="section-title">Proyectos recientes</h2>
             <p class="section-desc">
-              Casos de muestra editables que ilustran cómo resolvemos retos reales de negocio con producto digital a medida.
+              Muestra real de soluciones digitales, webs, aplicaciones móviles y sistemas a medida diseñados para nuestros clientes.
             </p>
           </div>
           <a href="#contacto" class="btn btn--ghost">Solicitar dossier completo</a>
         </div>
 
-        <div class="projects-grid">
+        <div class="projects-grid" id="projects-grid">
           <!-- Proyecto 1: Web App -->
           <article class="project-card glass-card" data-reveal>
-            <!-- Imagen placeholder oscura editable (sustituir el bloque visual por <img> cuando se tengan capturas reales) -->
             <div class="project-card__media project-media--webapp" aria-hidden="true">
               <div class="project-media__ui">
                 <div class="ui-bar">
@@ -615,8 +725,51 @@
       </div>
     </section>
 
+    <!-- SECCIÓN PREGUNTAS FRECUENTES (REFUERZA SEO Y CONVERSIÓN) -->
+    <section class="section section--alt" id="faq">
+      <div class="container faq-layout">
+        <div class="section-header" data-reveal>
+          <span class="section-eyebrow">Preguntas frecuentes</span>
+          <h2 class="section-title">Resolvemos tus dudas antes de empezar</h2>
+          <p class="section-desc">
+            Claridad total sobre plazos, propiedad del código, mantenimiento y forma de trabajo en España.
+          </p>
+        </div>
+
+        <div class="faq-list" data-reveal>
+          <details class="faq-item glass-card" open>
+            <summary class="faq-item__q">¿Cuánto tarda en estar lista una página web o aplicación?</summary>
+            <p class="faq-item__a">
+              Una landing page o web corporativa suele entregarse en 2 a 3 semanas. Para web apps, software a medida o aplicaciones móviles iOS y Android, definimos un calendario por hitos semanales con entregas visibles desde la primera semana.
+            </p>
+          </details>
+
+          <details class="faq-item glass-card">
+            <summary class="faq-item__q">¿Trabajáis en toda España?</summary>
+            <p class="faq-item__a">
+              Sí. Prestamos servicio remoto a nivel nacional en toda España, manteniendo trato directo con el equipo técnico que desarrolla tu proyecto desde el análisis inicial hasta la puesta en producción.
+            </p>
+          </details>
+
+          <details class="faq-item glass-card">
+            <summary class="faq-item__q">¿El código fuente y el dominio son 100 % míos?</summary>
+            <p class="faq-item__a">
+              Sí. Tu dominio, tu servidor y todo el código desarrollado a medida pertenecen íntegramente a tu negocio, sin permanencias ni dependencias ocultas.
+            </p>
+          </details>
+
+          <details class="faq-item glass-card">
+            <summary class="faq-item__q">¿Ofrecéis mantenimiento, SEO técnico y evolución continua?</summary>
+            <p class="faq-item__a">
+              Sí. Podemos encargarnos de las actualizaciones, copias de seguridad, optimización de velocidad móvil (Core Web Vitals) y nuevas funcionalidades conforme crezca tu empresa.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <!-- 7. SECCIÓN DE CONTACTO / CTA FINAL -->
-    <section class="section section--alt" id="contacto">
+    <section class="section" id="contacto">
       <div class="container contact-layout">
         <div class="contact-info" data-reveal>
           <span class="section-eyebrow">Contacto</span>
@@ -626,7 +779,7 @@
           </p>
 
           <div class="contact-details">
-            <a href="mailto:hola@safesatech.es" class="contact-detail glass-card">
+            <a href="mailto:safesatech@gmail.com" class="contact-detail glass-card">
               <div class="contact-detail__icon" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
                   <rect width="20" height="16" x="2" y="4" rx="2" />
@@ -635,7 +788,7 @@
               </div>
               <div>
                 <span class="contact-detail__label">Correo electrónico directo</span>
-                <strong class="contact-detail__value">hola@safesatech.es</strong>
+                <strong class="contact-detail__value">safesatech@gmail.com</strong>
               </div>
             </a>
 
@@ -662,9 +815,15 @@
           </div>
         </div>
 
-        <!-- Formulario limpio -->
+        <!-- Formulario limpio conectado a api/contact.php + BD MySQL -->
         <div class="contact-form-wrap glass-card" data-reveal data-reveal-delay="100">
-          <form class="contact-form" id="contact-form" novalidate>
+          <form class="contact-form" id="contact-form" action="api/contact.php" method="POST" novalidate>
+            <!-- Campo antispam oculto -->
+            <div class="hp-field" aria-hidden="true">
+              <label for="website">Sitio web</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+
             <div class="form-group">
               <label for="nombre" class="form-label">Nombre</label>
               <input
@@ -724,7 +883,7 @@
             </div>
 
             <button type="submit" class="btn btn--primary btn--lg btn--full" id="submit-btn">
-              <span>Enviar consulta</span>
+              <span id="submit-btn-text">Enviar consulta</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="m22 2-7 20-4-9-9-4Z" />
                 <path d="M22 2 11 13" />
@@ -745,7 +904,7 @@
         <div class="footer__brand">
           <a href="#inicio" class="brand" aria-label="SafesaTech — Volver arriba">
             <span class="brand__mark" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="38" height="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1" y="1" width="38" height="38" rx="10" fill="#141923" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" />
                 <path
                   d="M9.5 14.5C9.5 11.7386 11.7386 9.5 14.5 9.5H21.5V13.5H14.5C13.9477 13.5 13.5 13.9477 13.5 14.5V16.8C13.5 17.3523 13.9477 17.8 14.5 17.8H18.5C21.2614 17.8 23.5 20.0386 23.5 22.8V25.5C23.5 28.2614 21.2614 30.5 18.5 30.5H9.5V26.5H18.5C19.0523 26.5 19.5 26.0523 19.5 25.5V22.8C19.5 22.2477 19.0523 21.8 18.5 21.8H14.5C11.7386 21.8 9.5 19.5614 9.5 16.8V14.5Z"
@@ -763,22 +922,24 @@
 
         <div class="footer__links-group">
           <div class="footer__col">
-            <h4 class="footer__heading">Navegación</h4>
+            <p class="footer__heading">Navegación</p>
             <ul class="footer__list">
               <li><a href="#servicios">Servicios</a></li>
               <li><a href="#ventajas">Por qué SafesaTech</a></li>
               <li><a href="#proceso">Proceso</a></li>
               <li><a href="#proyectos">Proyectos</a></li>
+              <li><a href="#faq">Preguntas frecuentes</a></li>
               <li><a href="#contacto">Contacto</a></li>
             </ul>
           </div>
 
           <div class="footer__col">
-            <h4 class="footer__heading">Legal</h4>
+            <p class="footer__heading">Legal</p>
             <ul class="footer__list">
               <li><button type="button" class="footer__legal-btn" data-legal="aviso">Aviso Legal</button></li>
               <li><button type="button" class="footer__legal-btn" data-legal="privacidad">Política de Privacidad</button></li>
               <li><button type="button" class="footer__legal-btn" data-legal="cookies">Política de Cookies</button></li>
+              <li><a href="/admin.php">Acceso estudio</a></li>
             </ul>
           </div>
         </div>
@@ -791,7 +952,7 @@
     </div>
   </footer>
 
-  <!-- Modal para textos legales placeholder -->
+  <!-- Modal para textos legales -->
   <div class="modal" id="legal-modal" role="dialog" aria-modal="true" aria-labelledby="legal-modal-title" hidden>
     <div class="modal__backdrop" data-close-modal></div>
     <div class="modal__dialog glass-card">
@@ -808,6 +969,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

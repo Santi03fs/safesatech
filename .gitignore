@@ -1,0 +1,10 @@
+# Configuración local con credenciales reales (NO subir a GitHub)
+api/config.local.php
+
+# Fotos subidas en producción por el usuario
+uploads/*
+!uploads/.gitkeep
+
+# Sistema
+.DS_Store
+Thumbs.db

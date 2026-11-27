@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin.php
+Disallow: /api/
+
+Sitemap: https://safesatech.es/sitemap.xml
