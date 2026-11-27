@@ -1418,6 +1418,159 @@ textarea {
 }
 
 /* ==========================================================================
+   DEMOS DE WEBS PARA BARES
+   ========================================================================== */
+.demos-showcase {
+  margin-top: 72px;
+  padding-top: 56px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.demos-showcase__header {
+  max-width: 680px;
+  margin-bottom: 36px;
+}
+
+.demos-showcase__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2.5vw, 2rem);
+  font-weight: 800;
+  line-height: 1.22;
+  margin: 0 0 12px;
+}
+
+.demos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.demo-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.demo-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-card), var(--shadow-glow);
+}
+
+.demo-card__preview {
+  position: relative;
+  padding: 44px 24px 30px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.demo-badge-live {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(13, 16, 21, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+}
+
+.demo-preview__brand {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.demo-preview__sub {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.demo-preview--alambique {
+  background: radial-gradient(circle at 20% 20%, rgba(212, 163, 89, 0.28), transparent 60%), #18130F;
+  color: #F7EBDD;
+}
+
+.demo-preview--alambique .demo-preview__brand {
+  color: #E3B368;
+}
+
+.demo-preview--obsidian {
+  background: radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.24), transparent 58%),
+              radial-gradient(circle at 20% 80%, rgba(226, 183, 120, 0.18), transparent 60%),
+              #090A0F;
+  color: #F8FAFC;
+}
+
+.demo-preview--obsidian .demo-preview__brand {
+  letter-spacing: 0.08em;
+  color: #34D399;
+}
+
+.demo-preview--malta {
+  background: radial-gradient(circle at 25% 30%, rgba(245, 158, 11, 0.28), transparent 60%), #121316;
+  color: #FEF3C7;
+}
+
+.demo-preview--malta .demo-preview__brand {
+  color: #FBBF24;
+  letter-spacing: 0.04em;
+}
+
+.demo-preview--brisa {
+  background: radial-gradient(circle at 20% 20%, rgba(0, 210, 211, 0.26), transparent 55%),
+              radial-gradient(circle at 85% 80%, rgba(255, 126, 103, 0.24), transparent 55%),
+              #0B151E;
+  color: #F0FDFA;
+}
+
+.demo-preview--brisa .demo-preview__brand {
+  color: #2DD4BF;
+}
+
+.demo-card__body {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.demo-card__body .project-card__desc {
+  margin-bottom: 22px;
+  flex: 1;
+}
+
+.demo-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media (max-width: 820px) {
+  .demos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .demo-card__body {
+    padding: 20px;
+  }
+
+  .demo-card__actions .btn {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
    FAQ
    ========================================================================== */
 .faq-layout {

@@ -1,6 +1,7 @@
 # SafesaTech.es — Rendimiento PageSpeed, Caché, HTTPS y Seguridad
 
 Options -Indexes
+ErrorDocument 404 /404.html
 
 # Redirección a HTTPS en producción
 <IfModule mod_rewrite.c>

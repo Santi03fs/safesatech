@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-T883SM5G"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malta Brava Taproom — Cervecería Artesanal y Burgers | Demo SafesaTech</title>
+  <meta name="description" content="Modelo interactivo de web para cervecería artesanal con pizarra de grifos en vivo y carrito de pedidos online creado por SafesaTech.es." />
+  <link rel="canonical" href="https://safesatech.es/demos/cerveceria-malta-brava.html" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" />
+  <style>
+    :root {
+      --bg: #111215;
+      --surface: #191B20;
+      --amber: #F59E0B;
+      --red: #EF4444;
+      --text: #F9FAFB;
+      --muted: #9CA3AF;
+      --border: rgba(255, 255, 255, 0.09);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: radial-gradient(circle at 20% 10%, rgba(245, 158, 11, 0.14), transparent 45%), var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: clip;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1140px; margin: 0 auto; padding-inline: 20px; }
+
+    .demo-topbar { background: #0D1015; border-bottom: 1px solid rgba(0, 210, 211, 0.25); font-size: 0.84rem; padding: 10px 0; }
+    .demo-topbar__inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+    .demo-topbar__back { color: #00D2D3; font-weight: 600; }
+    .demo-topbar__cta { background: linear-gradient(135deg, #00D2D3, #0984E3); color: #071017; font-weight: 700; padding: 6px 14px; border-radius: 999px; font-size: 0.8rem; }
+
+    .header { position: sticky; top: 0; z-index: 40; background: rgba(17, 18, 21, 0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .header__inner { height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.25rem; color: var(--amber); letter-spacing: 0.04em; }
+    .nav { display: flex; gap: 24px; }
+    .nav a { color: var(--muted); font-size: 0.92rem; font-weight: 500; }
+    .nav a:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 11px 20px; border-radius: 10px; font-weight: 700; font-size: 0.9rem;
+      cursor: pointer; border: 1px solid transparent; transition: transform 0.2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn--amber { background: var(--amber); color: #160F02; }
+    .btn--ghost { background: rgba(255,255,255,0.05); border-color: var(--border); color: var(--text); }
+
+    .hero { padding: 68px 0 60px; border-bottom: 1px solid var(--border); }
+    .tag-pill { display: inline-block; padding: 5px 12px; border-radius: 999px; background: rgba(245,158,11,0.14); border: 1px solid rgba(245,158,11,0.35); color: var(--amber); font-size: 0.8rem; font-weight: 700; margin-bottom: 16px; }
+    h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(2.1rem, 4.4vw, 3.35rem); line-height: 1.1; margin: 0 0 16px; max-width: 19ch; }
+    .hero p { color: var(--muted); max-width: 55ch; margin: 0 0 26px; }
+
+    .section { padding: 64px 0; }
+    .section__title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 0 0 8px; }
+    .section__sub { color: var(--muted); margin: 0 0 24px; }
+
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+    .tab { background: var(--surface); border: 1px solid var(--border); color: var(--muted); padding: 8px 15px; border-radius: 999px; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+    .tab.is-active { background: var(--amber); color: #160F02; border-color: var(--amber); }
+
+    .tap-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .tap-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 8px; }
+    .tap-num { font-size: 0.75rem; font-weight: 800; color: var(--amber); text-transform: uppercase; letter-spacing: 0.08em; }
+    .tap-name { font-weight: 700; font-size: 1.06rem; margin: 0; }
+    .tap-meta { display: flex; gap: 12px; font-size: 0.82rem; color: var(--muted); }
+    .keg-bar { height: 7px; border-radius: 99px; background: rgba(255,255,255,0.08); overflow: hidden; margin-top: 4px; }
+    .keg-bar span { display: block; height: 100%; background: linear-gradient(90deg, var(--amber), #FBBF24); }
+
+    .order-layout { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 24px; align-items: start; }
+    .food-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .food-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; }
+    .cart-box { position: sticky; top: 90px; background: var(--surface); border: 1px solid rgba(245,158,11,0.35); border-radius: 16px; padding: 20px; }
+    .cart-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .qty-btns { display: inline-flex; align-items: center; gap: 6px; }
+    .qty-btn { width: 26px; height: 26px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--text); cursor: pointer; font-weight: 700; }
+    input, select { width: 100%; padding: 10px 12px; border-radius: 9px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit; }
+    .order-ok { margin-top: 12px; padding: 13px; border-radius: 10px; background: rgba(34, 197, 94, 0.14); border: 1px solid rgba(34, 197, 94, 0.4); font-size: 0.88rem; }
+
+    .footer { padding: 30px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.86rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+    @media (max-width: 900px) {
+      .tap-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .order-layout, .food-grid { grid-template-columns: 1fr; }
+      .nav { display: none; }
+      .cart-box { position: static; }
+    }
+    @media (max-width: 580px) { .tap-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="demo-topbar">
+    <div class="container demo-topbar__inner">
+      <a href="/#demos-bares" class="demo-topbar__back">← Volver a SafesaTech.es</a>
+      <span>Modelo interactivo: <strong>Cervecería Artesanal &amp; Pedidos</strong></span>
+      <a href="/#contacto" class="demo-topbar__cta">Quiero esta web para mi local</a>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#top" class="brand">MALTA BRAVA</a>
+      <nav class="nav">
+        <a href="#grifos">Pizarra de Grifos</a>
+        <a href="#pedir">Pedir Burgers &amp; Birra</a>
+      </nav>
+      <a href="#pedir" class="btn btn--amber">Carrito (<span id="hdr-count">0</span>)</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <span class="tag-pill">Fábrica Propia &amp; Taproom • Valencia</span>
+        <h1>6 grifos rotativos en directo y smash burgers al punto.</h1>
+        <p>
+          Consulta qué barriles tenemos pinchados hoy en tiempo real y haz tu pedido desde la mesa o para recoger en barra sin esperar cola. Usa el cupón <strong>MALTA10</strong> para probar el descuento.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+          <a href="#grifos" class="btn btn--amber">Ver grifos de hoy</a>
+          <a href="#pedir" class="btn btn--ghost">Hacer pedido online</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="grifos">
+      <div class="container">
+        <h2 class="section__title">Pizarra de Grifos en Vivo</h2>
+        <p class="section__sub">Actualizada al momento con porcentaje de barril restante, amargor (IBU) y graduación.</p>
+
+        <div class="tabs">
+          <button type="button" class="tab is-active" data-style="todas">Todos los grifos</button>
+          <button type="button" class="tab" data-style="IPA">IPA</button>
+          <button type="button" class="tab" data-style="Lager">Lager</button>
+          <button type="button" class="tab" data-style="Stout">Stout</button>
+          <button type="button" class="tab" data-style="Trigo">Trigo</button>
+        </div>
+
+        <div class="tap-grid" id="tap-grid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="pedir" style="border-top:1px solid var(--border);background:rgba(25,27,32,0.5);">
+      <div class="container">
+        <h2 class="section__title">Pedido Rápido (Mesa o Recogida)</h2>
+        <p class="section__sub">Añade platos o cervezas al carrito y prueba el cálculo automático con código promocional.</p>
+
+        <div class="order-layout">
+          <div class="food-grid" id="food-grid"></div>
+
+          <aside class="cart-box">
+            <h3 style="margin:0 0 12px;font-size:1.15rem;">Tu pedido</h3>
+            <div id="cart-list"><p style="color:var(--muted);font-size:0.88rem;">Carrito vacío.</p></div>
+
+            <div style="margin-top:14px;display:grid;gap:10px;">
+              <div style="display:flex;gap:8px;">
+                <input id="promo-code" placeholder="Cupón (prueba MALTA10)" />
+                <button type="button" id="apply-promo" class="btn btn--ghost" style="padding:10px 14px;">Aplicar</button>
+              </div>
+              <select id="pickup-mode">
+                <option>Servir en mi mesa (indicar en barra)</option>
+                <option>Recoger en barra en 15 min</option>
+              </select>
+              <div style="display:flex;justify-content:space-between;font-weight:700;font-size:1.05rem;">
+                <span>Total</span>
+                <span id="cart-total" style="color:var(--amber);">0,00 €</span>
+              </div>
+              <button type="button" id="checkout-btn" class="btn btn--amber" style="width:100%;">Confirmar pedido</button>
+            </div>
+            <div id="order-msg" class="order-ok" hidden></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <span>Malta Brava Taproom — Demo funcional desarrollada por <a href="/" style="color:#00D2D3;">SafesaTech.es</a></span>
+    <span>© 2026 Modelo interactivo para cervecerías</span>
+  </footer>
+
+  <script>
+    const TAPS = [
+      { num: 1, name: 'Brava West Coast IPA', style: 'IPA', abv: '6,5%', ibu: '62 IBU', keg: 84, price: 5.5, desc: 'Lúpulos Citra y Simcoe, notas de pino y pomelo.' },
+      { num: 2, name: 'Turia Crisp Lager', style: 'Lager', abv: '4,8%', ibu: '22 IBU', keg: 92, price: 4.2, desc: 'Rubia filtrada en frío, muy refrescante y seca.' },
+      { num: 3, name: 'Noche Negra Oatmeal Stout', style: 'Stout', abv: '5,9%', ibu: '35 IBU', keg: 46, price: 5.8, desc: 'Cacao tostado, café espresso y espuma cremosa.' },
+      { num: 4, name: 'Sol de Trigo Weissbier', style: 'Trigo', abv: '5,1%', ibu: '14 IBU', keg: 68, price: 4.8, desc: 'Afrutada, sin filtrar, toques de plátano y clavo.' },
+      { num: 5, name: 'Hazy Mango NEIPA', style: 'IPA', abv: '6,2%', ibu: '40 IBU', keg: 29, price: 6.0, desc: 'Turbia, sedosa y explosión tropical en nariz.' },
+      { num: 6, name: 'Pilsner de Barrio', style: 'Lager', abv: '4,6%', ibu: '28 IBU', keg: 77, price: 4.0, desc: 'Malta Pilsen alemana y lúpulo noble Saaz.' }
+    ];
+
+    const MENU_ITEMS = [
+      { id: 101, name: 'Smash Burger Doble Bacon', price: 12.9, desc: 'Doble disco de vaca madurada, cheddar fundido y salsa brava.' },
+      { id: 102, name: 'Burger Crispy Chicken & Miel', price: 11.5, desc: 'Pollo crujiente 24h en suero, coleslaw y mostaza dulce.' },
+      { id: 103, name: 'Nachos Machos Pulled Pork', price: 10.8, desc: 'Totopos caseros, guacamole, jalapeños y queso fundido.' },
+      { id: 104, name: 'Tabla Degustación 4 Cañas Craft', price: 11.0, desc: 'Cuatro vasos de 15 cl de los grifos que tú elijas.' }
+    ];
+
+    let activeStyle = 'todas';
+    const cart = {};
+    let discount = 0;
+
+    function renderTaps() {
+      const list = TAPS.filter((t) => activeStyle === 'todas' || t.style === activeStyle);
+      document.getElementById('tap-grid').innerHTML = list.map((t) => `
+        <article class="tap-card">
+          <span class="tap-num">Grifo #${t.num} • ${t.style}</span>
+          <h3 class="tap-name">${t.name}</h3>
+          <div class="tap-meta"><span>ABV ${t.abv}</span><span>${t.ibu}</span><span style="color:var(--amber);font-weight:700;">${t.price.toFixed(2).replace('.', ',')} €</span></div>
+          <p style="margin:0;font-size:0.86rem;color:var(--muted);">${t.desc}</p>
+          <div style="font-size:0.76rem;color:var(--muted);">Barril restante: ${t.keg}%</div>
+          <div class="keg-bar"><span style="width:${t.keg}%"></span></div>
+        </article>
+      `).join('');
+    }
+
+    function renderFood() {
+      const all = [...MENU_ITEMS, ...TAPS.slice(0, 2).map((t) => ({ id: t.num, name: `Pinta ${t.name}`, price: t.price, desc: `${t.style} (${t.abv}) recién tirada.` }))];
+      document.getElementById('food-grid').innerHTML = all.map((item) => `
+        <article class="food-card">
+          <div>
+            <div style="display:flex;justify-content:space-between;gap:8px;font-weight:700;">
+              <span>${item.name}</span>
+              <span style="color:var(--amber);">${item.price.toFixed(2).replace('.', ',')} €</span>
+            </div>
+            <p style="margin:6px 0 0;font-size:0.85rem;color:var(--muted);">${item.desc}</p>
+          </div>
+          <button type="button" class="btn btn--ghost" style="padding:8px 12px;font-size:0.84rem;" onclick='addItem(${JSON.stringify(item)})'>+ Añadir al pedido</button>
+        </article>
+      `).join('');
+    }
+
+    window.addItem = function (item) {
+      if (!cart[item.id]) cart[item.id] = { ...item, qty: 0 };
+      cart[item.id].qty += 1;
+      renderCart();
+    };
+
+    window.changeQty = function (id, delta) {
+      if (!cart[id]) return;
+      cart[id].qty += delta;
+      if (cart[id].qty <= 0) delete cart[id];
+      renderCart();
+    };
+
+    function renderCart() {
+      const entries = Object.values(cart);
+      const count = entries.reduce((acc, i) => acc + i.qty, 0);
+      document.getElementById('hdr-count').textContent = count;
+
+      const listEl = document.getElementById('cart-list');
+      if (!entries.length) {
+        listEl.innerHTML = '<p style="color:var(--muted);font-size:0.88rem;">Carrito vacío.</p>';
+        document.getElementById('cart-total').textContent = '0,00 €';
+        return;
+      }
+
+      let subtotal = 0;
+      listEl.innerHTML = entries.map((i) => {
+        subtotal += i.price * i.qty;
+        return `
+          <div class="cart-row">
+            <div><strong>${i.name}</strong><br><small style="color:var(--muted);">${i.price.toFixed(2).replace('.', ',')} € ud.</small></div>
+            <div class="qty-btns">
+              <button type="button" class="qty-btn" onclick="changeQty(${i.id}, -1)">−</button>
+              <span>${i.qty}</span>
+              <button type="button" class="qty-btn" onclick="changeQty(${i.id}, 1)">+</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const total = subtotal * (1 - discount);
+      document.getElementById('cart-total').textContent = total.toFixed(2).replace('.', ',') + ' €' + (discount > 0 ? ' (-10%)' : '');
+    }
+
+    document.querySelectorAll('.tab').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        activeStyle = btn.dataset.style;
+        renderTaps();
+      });
+    });
+
+    document.getElementById('apply-promo').addEventListener('click', () => {
+      const code = document.getElementById('promo-code').value.trim().toUpperCase();
+      discount = code === 'MALTA10' ? 0.10 : 0;
+      renderCart();
+      const msg = document.getElementById('order-msg');
+      msg.hidden = false;
+      msg.textContent = discount > 0 ? 'Cupón MALTA10 aplicado (10 % de descuento).' : 'Cupón no válido. Prueba con MALTA10.';
+    });
+
+    document.getElementById('checkout-btn').addEventListener('click', () => {
+      const msg = document.getElementById('order-msg');
+      msg.hidden = false;
+      if (!Object.keys(cart).length) {
+        msg.textContent = 'Añade algún producto antes de confirmar.';
+        return;
+      }
+      const mode = document.getElementById('pickup-mode').value;
+      const num = 'MB-' + Math.floor(100 + Math.random() * 900);
+      msg.innerHTML = `<strong>¡Pedido ${num} enviado a cocina!</strong> (${mode}).`;
+    });
+
+    renderTaps();
+    renderFood();
+  </script>
+</body>
+</html>

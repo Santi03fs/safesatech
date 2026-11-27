@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-T883SM5G"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obsidian Cocktail Club — Coctelería de Autor y Reservados | Demo SafesaTech</title>
+  <meta name="description" content="Web interactiva de coctelería nocturna con carta por perfil de sabor, favoritos en mesa y reserva de reservados VIP desarrollada por SafesaTech.es." />
+  <link rel="canonical" href="https://safesatech.es/demos/cocteleria-obsidian.html" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+  <style>
+    :root {
+      --bg: #08090D;
+      --card: #11131C;
+      --emerald: #10B981;
+      --gold: #E2B778;
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --border: rgba(255, 255, 255, 0.09);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: radial-gradient(circle at 85% 12%, rgba(16, 185, 129, 0.14), transparent 42%), var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: clip;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1120px; margin: 0 auto; padding-inline: 20px; }
+
+    .demo-topbar {
+      background: #0D1015;
+      border-bottom: 1px solid rgba(0, 210, 211, 0.25);
+      font-size: 0.84rem;
+      padding: 10px 0;
+    }
+    .demo-topbar__inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+    .demo-topbar__back { color: #00D2D3; font-weight: 600; }
+    .demo-topbar__cta {
+      background: linear-gradient(135deg, #00D2D3, #0984E3);
+      color: #071017; font-weight: 700; padding: 6px 14px; border-radius: 999px; font-size: 0.8rem;
+    }
+
+    .header {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(8, 9, 13, 0.88); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header__inner { height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; letter-spacing: 0.14em; color: var(--emerald); }
+    .nav { display: flex; gap: 24px; }
+    .nav a { color: var(--muted); font-size: 0.9rem; }
+    .nav a:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 11px 20px; border-radius: 999px; font-weight: 700; font-size: 0.9rem;
+      cursor: pointer; border: 1px solid transparent; transition: transform 0.2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn--emerald { background: linear-gradient(135deg, #10B981, #059669); color: #04120D; }
+    .btn--ghost { background: rgba(255,255,255,0.04); border-color: var(--border); color: var(--text); }
+
+    .hero { padding: 74px 0 64px; border-bottom: 1px solid var(--border); }
+    .eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.78rem; font-weight: 700; display: block; margin-bottom: 12px; }
+    h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(2.1rem, 4.5vw, 3.4rem); line-height: 1.1; margin: 0 0 16px; max-width: 18ch; }
+    .hero p { color: var(--muted); max-width: 54ch; margin: 0 0 28px; }
+
+    .section { padding: 66px 0; }
+    .section__title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 0 0 8px; }
+    .section__sub { color: var(--muted); margin: 0 0 26px; }
+
+    .layout-menu { display: grid; grid-template-columns: 1.35fr 0.65fr; gap: 24px; align-items: start; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .tab {
+      background: var(--card); border: 1px solid var(--border); color: var(--muted);
+      padding: 8px 15px; border-radius: 999px; cursor: pointer; font-weight: 600; font-size: 0.85rem;
+    }
+    .tab.is-active { background: var(--emerald); color: #04120D; border-color: var(--emerald); }
+
+    .drinks-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .drink-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 18px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .drink-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+    .drink-name { font-weight: 700; margin: 0; font-size: 1.03rem; }
+    .drink-price { color: var(--gold); font-weight: 700; }
+    .drink-notes { color: var(--muted); font-size: 0.88rem; margin: 0; }
+    .meter { height: 5px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden; margin: 4px 0 8px; }
+    .meter span { display: block; height: 100%; background: linear-gradient(90deg, var(--emerald), var(--gold)); }
+
+    .tray-box {
+      position: sticky; top: 90px;
+      background: var(--card); border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 18px; padding: 20px;
+    }
+    .tray-item { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .tray-remove { background: none; border: 0; color: #F87171; cursor: pointer; font-weight: 700; }
+
+    .vip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+    .card-box { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 24px; }
+    .event-row { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .event-row:last-child { border-bottom: 0; }
+    label { display: block; font-size: 0.84rem; font-weight: 600; margin-bottom: 5px; color: var(--gold); }
+    input, select {
+      width: 100%; padding: 11px 12px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--bg); color: var(--text); font: inherit; margin-bottom: 12px;
+    }
+    .confirm-box { padding: 14px; border-radius: 12px; background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.4); margin-top: 12px; font-size: 0.9rem; }
+
+    .footer { padding: 30px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.86rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+    @media (max-width: 900px) {
+      .layout-menu, .drinks-grid, .vip-grid { grid-template-columns: 1fr; }
+      .nav { display: none; }
+      .tray-box { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-topbar">
+    <div class="container demo-topbar__inner">
+      <a href="/#demos-bares" class="demo-topbar__back">← Volver a SafesaTech.es</a>
+      <span>Modelo interactivo: <strong>Coctelería Nocturna &amp; VIP</strong></span>
+      <a href="/#contacto" class="demo-topbar__cta">Quiero esta web para mi local</a>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#top" class="brand">OBSIDIAN</a>
+      <nav class="nav">
+        <a href="#cocteles">Carta de Autor</a>
+        <a href="#vip">Reservados VIP</a>
+        <a href="#agenda">DJ Sets</a>
+      </nav>
+      <a href="#vip" class="btn btn--emerald">Reservar VIP</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Cocktail Club &amp; Speakeasy • Viernes y Sábados hasta las 04:00</span>
+        <h1>Mixología de precisión, humo de roble y música electrónica.</h1>
+        <p>
+          Elige tus cócteles favoritos desde el móvil antes de llamar al camarero, consulta los DJ sets de la semana y calcula el precio de tu reservado VIP al instante.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+          <a href="#cocteles" class="btn btn--emerald">Ver carta de cócteles</a>
+          <a href="#vip" class="btn btn--ghost">Calcular reservado VIP</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cocteles">
+      <div class="container">
+        <h2 class="section__title">Carta de Coctelería de Autor</h2>
+        <p class="section__sub">Filtra por perfil de sabor y añade tus favoritos a tu ronda de mesa.</p>
+
+        <div class="tabs">
+          <button type="button" class="tab is-active" data-taste="todos">Todos</button>
+          <button type="button" class="tab" data-taste="citrico">Cítricos y Frescos</button>
+          <button type="button" class="tab" data-taste="ahumado">Ahumados y Secos</button>
+          <button type="button" class="tab" data-taste="dulce">Dulces y Especiados</button>
+          <button type="button" class="tab" data-taste="sin">0,0 % Sin Alcohol</button>
+        </div>
+
+        <div class="layout-menu">
+          <div class="drinks-grid" id="drinks-grid"></div>
+
+          <aside class="tray-box">
+            <h3 style="margin:0 0 6px;font-size:1.1rem;">Tu ronda de mesa</h3>
+            <p style="margin:0 0 14px;font-size:0.84rem;color:var(--muted);">Enseña esta lista al camarero o calcula el total.</p>
+            <div id="tray-items"><p style="color:var(--muted);font-size:0.88rem;">Aún no has añadido cócteles.</p></div>
+            <div style="display:flex;justify-content:space-between;margin-top:14px;font-weight:700;">
+              <span>Total ronda</span>
+              <span id="tray-total" style="color:var(--gold);">0,00 €</span>
+            </div>
+            <button type="button" id="tray-send" class="btn btn--emerald" style="width:100%;margin-top:14px;">Enviar ronda al camarero</button>
+            <div id="tray-msg" class="confirm-box" hidden></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="vip" style="border-top:1px solid var(--border);">
+      <div class="container vip-grid">
+        <div class="card-box" id="agenda">
+          <h2 class="section__title" style="font-size:1.5rem;">Agenda Musical &amp; DJ Sets</h2>
+          <p class="section__sub" style="margin-bottom:16px;">Entrada libre hasta la 01:00 con lista.</p>
+          <div class="event-row">
+            <div><strong>Jueves Acoustic &amp; Jazz</strong><br><small style="color:var(--muted);">21:30 – 01:30</small></div>
+            <span style="color:var(--emerald);font-weight:600;">Libre</span>
+          </div>
+          <div class="event-row">
+            <div><strong>Viernes Deep House Session</strong><br><small style="color:var(--muted);">DJ Mateo Vance • 23:00 – 04:00</small></div>
+            <span style="color:var(--gold);font-weight:600;">Lista VIP</span>
+          </div>
+          <div class="event-row">
+            <div><strong>Sábado Obsidian Night</strong><br><small style="color:var(--muted);">Clara Solís • 23:30 – 04:30</small></div>
+            <span style="color:var(--gold);font-weight:600;">Reservados</span>
+          </div>
+        </div>
+
+        <form class="card-box" id="vip-form">
+          <h2 class="section__title" style="font-size:1.5rem;">Reservar Mesa / Botella VIP</h2>
+          <label for="vip-name">Nombre y apellidos</label>
+          <input id="vip-name" required placeholder="Ej. Álvaro Ruiz" />
+          <label for="vip-pack">Tipo de reservado</label>
+          <select id="vip-pack">
+            <option value="140">Zona Lounge (4 pers. + 1 botella) — 140 €</option>
+            <option value="240">Cabina DJ (6 pers. + 2 botellas) — 240 €</option>
+            <option value="360">Palco Obsidian (10 pers. + 3 botellas) — 360 €</option>
+          </select>
+          <label for="vip-day">Noche</label>
+          <select id="vip-day">
+            <option>Este Viernes</option>
+            <option>Este Sábado</option>
+            <option>Próximo Jueves</option>
+          </select>
+          <p style="margin:4px 0 14px;font-size:0.95rem;">Importe estimado: <strong id="vip-price" style="color:var(--emerald);">140 €</strong></p>
+          <button type="submit" class="btn btn--emerald" style="width:100%;">Solicitar reservado</button>
+          <div id="vip-confirm" class="confirm-box" hidden></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <span>Obsidian Cocktail Club — Demo interactiva diseñada por <a href="/" style="color:#00D2D3;">SafesaTech.es</a></span>
+    <span>© 2026 Modelo para coctelerías y ocio nocturno</span>
+  </footer>
+
+  <script>
+    const DRINKS = [
+      { id: 1, name: 'Emerald Sour', taste: 'citrico', price: 13, power: 70, notes: 'Ginebra botánica, yuzu, albahaca fresca y espuma cítrica.' },
+      { id: 2, name: 'Smoked Obsidian Negroni', taste: 'ahumado', price: 15, power: 92, notes: 'Mezcal joven, vermut rojo reserva, bitter y humo de romero.' },
+      { id: 3, name: 'Velvet Espresso', taste: 'dulce', price: 14, power: 68, notes: 'Vodka, licor de café arábica, vainilla Bourbon y espresso.' },
+      { id: 4, name: 'Passion Mule 0,0%', taste: 'sin', price: 9, power: 20, notes: 'Maracuyá natural, jengibre picante, lima y soda artesanal.' },
+      { id: 5, name: 'Gold Fashioned', taste: 'ahumado', price: 16, power: 95, notes: 'Bourbon single barrel, sirope de arce tostado y naranja.' },
+      { id: 6, name: 'Mediterranean Spritz', taste: 'citrico', price: 12, power: 48, notes: 'Bergamota, flor de saúco, cava brut nature y pomelo rosa.' }
+    ];
+
+    let activeTaste = 'todos';
+    const tray = [];
+    const grid = document.getElementById('drinks-grid');
+
+    function renderDrinks() {
+      const list = DRINKS.filter((d) => activeTaste === 'todos' || d.taste === activeTaste);
+      grid.innerHTML = list.map((d) => `
+        <article class="drink-card">
+          <div class="drink-top">
+            <h3 class="drink-name">${d.name}</h3>
+            <span class="drink-price">${d.price.toFixed(2).replace('.', ',')} €</span>
+          </div>
+          <p class="drink-notes">${d.notes}</p>
+          <div class="meter" title="Intensidad"><span style="width:${d.power}%"></span></div>
+          <button type="button" class="btn btn--ghost" style="padding:8px 14px;font-size:0.82rem;" onclick="addToTray(${d.id})">+ Añadir a mi ronda</button>
+        </article>
+      `).join('');
+    }
+
+    window.addToTray = function (id) {
+      const item = DRINKS.find((d) => d.id === id);
+      if (item) {
+        tray.push(item);
+        renderTray();
+      }
+    };
+
+    window.removeFromTray = function (index) {
+      tray.splice(index, 1);
+      renderTray();
+    };
+
+    function renderTray() {
+      const box = document.getElementById('tray-items');
+      const totalEl = document.getElementById('tray-total');
+      if (!tray.length) {
+        box.innerHTML = '<p style="color:var(--muted);font-size:0.88rem;">Aún no has añadido cócteles.</p>';
+        totalEl.textContent = '0,00 €';
+        return;
+      }
+      let sum = 0;
+      box.innerHTML = tray.map((item, idx) => {
+        sum += item.price;
+        return `<div class="tray-item"><span>${item.name} (${item.price} €)</span><button type="button" class="tray-remove" onclick="removeFromTray(${idx})" aria-label="Quitar">×</button></div>`;
+      }).join('');
+      totalEl.textContent = sum.toFixed(2).replace('.', ',') + ' €';
+    }
+
+    document.querySelectorAll('.tab').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        activeTaste = btn.dataset.taste;
+        renderDrinks();
+      });
+    });
+
+    document.getElementById('tray-send').addEventListener('click', () => {
+      const msg = document.getElementById('tray-msg');
+      msg.hidden = false;
+      msg.textContent = tray.length
+        ? `Ronda de ${tray.length} cóctel(es) lista para barra. ¡Enseguida te atendemos!`
+        : 'Añade primero al menos un cóctel a tu ronda.';
+    });
+
+    const packEl = document.getElementById('vip-pack');
+    const priceEl = document.getElementById('vip-price');
+    packEl.addEventListener('change', () => { priceEl.textContent = packEl.value + ' €'; });
+
+    document.getElementById('vip-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('vip-name').value.trim();
+      const day = document.getElementById('vip-day').value;
+      const box = document.getElementById('vip-confirm');
+      box.hidden = false;
+      box.innerHTML = `Reservado bloqueado para <strong>${name}</strong> (${day}, ${packEl.value} €). Pase VIP: <strong>OBS-${Math.floor(100 + Math.random() * 900)}</strong>.`;
+    });
+
+    renderDrinks();
+  </script>
+</body>
+</html>

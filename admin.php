@@ -7,6 +7,16 @@
  * - Configuración SMTP opcional para entregas 100 % fiables a safesatech@gmail.com
  */
 
+header('X-Robots-Tag: noindex, nofollow');
+header('X-Frame-Options: SAMEORIGIN');
+
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'secure' => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+    'httponly' => true,
+    'samesite' => 'Lax',
+]);
 session_start();
 
 require_once __DIR__ . '/api/db.php';
@@ -181,19 +191,53 @@ if (!$isConfigured && $_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action']
 }
 
 // =========================================================================
-// LOGIN / LOGOUT
+// LOGIN / LOGOUT (con protección frente a fuerza bruta por IP)
 // =========================================================================
+function get_login_rate_file(): string
+{
+    $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    return sys_get_temp_dir() . '/safesa_login_' . hash('sha256', $ip) . '.json';
+}
+
+function get_login_attempts(): array
+{
+    $file = get_login_rate_file();
+    if (!is_file($file)) {
+        return ['count' => 0, 'blocked_until' => 0];
+    }
+    $data = json_decode((string) file_get_contents($file), true);
+    if (!is_array($data)) {
+        return ['count' => 0, 'blocked_until' => 0];
+    }
+    return [
+        'count' => (int) ($data['count'] ?? 0),
+        'blocked_until' => (int) ($data['blocked_until'] ?? 0),
+    ];
+}
+
 if ($isConfigured && $_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'login') {
-    if (!hash_equals($csrfToken, (string) ($_POST['csrf_token'] ?? ''))) {
+    $attempts = get_login_attempts();
+    if ($attempts['blocked_until'] > time()) {
+        $waitMin = (int) ceil(($attempts['blocked_until'] - time()) / 60);
+        $flashError = "Demasiados intentos fallidos. Espera {$waitMin} min antes de volver a intentarlo.";
+    } elseif (!hash_equals($csrfToken, (string) ($_POST['csrf_token'] ?? ''))) {
         $flashError = 'Sesión caducada. Vuelve a intentarlo.';
     } else {
         $pass = (string) ($_POST['password'] ?? '');
         if (password_verify($pass, ADMIN_PASSWORD_HASH)) {
+            @unlink(get_login_rate_file());
             session_regenerate_id(true);
             $_SESSION['safesa_admin'] = true;
             header('Location: admin.php');
             exit;
         }
+        $count = $attempts['count'] + 1;
+        $blockedUntil = $count >= 5 ? (time() + 300) : 0;
+        @file_put_contents(
+            get_login_rate_file(),
+            json_encode(['count' => $count >= 5 ? 0 : $count, 'blocked_until' => $blockedUntil]),
+            LOCK_EX
+        );
         $flashError = 'Contraseña incorrecta.';
     }
 }
